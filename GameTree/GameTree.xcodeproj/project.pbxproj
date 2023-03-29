@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45332C5329D4755000F151BF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5229D4755000F151BF /* GameView.swift */; };
+		45332C5529D4757C00F151BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5429D4757C00F151BF /* Extensions.swift */; };
 		4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */; };
 		4BD1B8D129D4630C00E29A43 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D029D4630C00E29A43 /* ContentView.swift */; };
 		4BD1B8D329D4630D00E29A43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D229D4630D00E29A43 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45332C5229D4755000F151BF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		45332C5429D4757C00F151BF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4BD1B8CB29D4630C00E29A43 /* GameTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTreeApp.swift; sourceTree = "<group>"; };
 		4BD1B8D029D4630C00E29A43 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */,
 				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
+				45332C5229D4755000F151BF /* GameView.swift */,
+				45332C5429D4757C00F151BF /* Extensions.swift */,
 				4BD1B8D229D4630D00E29A43 /* Assets.xcassets */,
 				4BD1B8D429D4630D00E29A43 /* GameTree.entitlements */,
 				4BD1B8D529D4630D00E29A43 /* Preview Content */,
@@ -139,6 +145,7 @@
 				4BD1B8C729D4630C00E29A43 /* Sources */,
 				4BD1B8C829D4630C00E29A43 /* Frameworks */,
 				4BD1B8C929D4630C00E29A43 /* Resources */,
+				45332C5129D471E000F151BF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -254,13 +261,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		45332C5129D471E000F151BF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4BD1B8C729D4630C00E29A43 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4BD1B8D129D4630C00E29A43 /* ContentView.swift in Sources */,
+				45332C5329D4755000F151BF /* GameView.swift in Sources */,
 				4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */,
+				45332C5529D4757C00F151BF /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
