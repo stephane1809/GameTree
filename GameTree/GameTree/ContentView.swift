@@ -20,7 +20,7 @@ struct ContentView: View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
                 Text("RECORD")
-                    .font(.largeTitle)
+                    .scaledFont(name: "Georgia", size: 34)
                 recordsView
                 HStack(alignment: .center, spacing: 40) {
                     navigation
@@ -43,18 +43,18 @@ struct ContentView: View {
         } label: {
             Image(systemName: isSelected ? selected : notSelected)
                 .foregroundColor(.black)
-                .font(.title2)
+                .scaledFont(name: "Georgia", size: 17)
         }
     }
 
     var recordsView: some View {
         HStack {
             Text("\(record)")
-                .font(.largeTitle)
+                .scaledFont(name: "Georgia", size: 34)
             Image(systemName: "tree")
-                .imageScale(.large)
+
                 .foregroundColor(.green)
-                .font(.largeTitle)
+                .scaledFont(name: "Georgia", size: 34)
         }
     }
     var navigation: some View {
@@ -62,9 +62,9 @@ struct ContentView: View {
                 HStack {
                     Text("Play")
                         .foregroundColor(.black)
-                        .font(.largeTitle)
+                        .scaledFont(name: "Georgia", size: 34)
                     Image(systemName: "play.circle")
-                          .font(.largeTitle)
+                        .scaledFont(name: "Georgia", size: 34)
                           .foregroundColor(.black)
                 }
                 .frame(width: 150, height: 50)

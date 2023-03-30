@@ -22,7 +22,7 @@ class GameScene: SKScene {
         }
     }
 
-    func createTree(){
+    func createTree() {
         let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
         let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 1400), CGPoint(x: 332, y: 1100)]
 
@@ -32,22 +32,16 @@ class GameScene: SKScene {
         tree.position = treePositions.randomElement()!
         //        tree.name = "tree"
 
-        //physics property
+        // physics property
         tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
         tree.physicsBody?.isDynamic = true
         //        tree.physicsBody!.affectedByGravity = true
         tree.physicsBody!.usesPreciseCollisionDetection = true
-
-
         self.addChild(tree)
-
-        //Animations
-
-
+        // Animations
     }
 
-
-    func deleteTree(){
+    func deleteTree() {
 
     }
 
