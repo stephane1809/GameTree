@@ -41,6 +41,17 @@ class GameScene: SKScene {
         // Animations
     }
 
+    func addLaserFloor(){
+        var laser = SKNode()
+           laser.position = CGPoint(x: self.size.width , y: 0)
+           laser.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: 1))
+           laser.physicsBody?.isDynamic = false
+           laser.physicsBody?.categoryBitMask = MascaraBit.Laser
+           laser.physicsBody?.collisionBitMask = 0
+           laser.name = "Laser"
+           addChild(laser)
+       }
+
     func deleteTree() {
 
     }
@@ -48,4 +59,8 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         createTree()
     }
+}
+
+struct MascaraBit {
+    static let Laser: UInt32 = 2
 }

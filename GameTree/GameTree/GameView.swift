@@ -19,8 +19,6 @@ struct GameView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
-//                Text("GameView")
-//                    .scaledFont(name: "Georgia", size: 11)
                 GameplayView()
             }
             .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
