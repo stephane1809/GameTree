@@ -17,8 +17,7 @@ struct GameplayView: View {
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.scaleMode = .fill
         scene.backgroundColor = .white
-//        scene.physicsWorld.speed = 1.2
-        scene.physicsWorld.gravity = CGVector(dx: 0, dy: -5.8)
+        scene.physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         return scene
     }
 
