@@ -11,8 +11,9 @@ import SpriteKit
 class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        addLaserFloor()
 
-        print("Game loaded")
 
         Task {
             while true {
@@ -28,9 +29,7 @@ class GameScene: SKScene {
 
         let tree = SKSpriteNode(imageNamed: "lofiTree")
         tree.size = treeSizes.randomElement()!
-        //        tree.color = .systemPurple
         tree.position = treePositions.randomElement()!
-        //        tree.name = "tree"
 
         // physics property
         tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
@@ -42,14 +41,17 @@ class GameScene: SKScene {
     }
 
     func addLaserFloor(){
-        var laser = SKNode()
-           laser.position = CGPoint(x: self.size.width , y: 0)
-           laser.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: 1))
-           laser.physicsBody?.isDynamic = false
-           laser.physicsBody?.categoryBitMask = MascaraBit.Laser
-           laser.physicsBody?.collisionBitMask = 0
-           laser.name = "Laser"
-           addChild(laser)
+        var laser = SKShapeNode()
+        laser.position = CGPoint(x: self.size.width , y: 0)
+        laser.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width*2, height: 1))
+        laser.fillColor = .blue
+        laser.physicsBody?.isDynamic = false
+        laser.physicsBody?.contactTestBitMask = MascaraBit.Laser
+        laser.physicsBody?.categoryBitMask = MascaraBit.Laser
+        laser.physicsBody?.collisionBitMask = 0
+        laser.name = "Laser"
+
+        addChild(laser)
        }
 
     func deleteTree() {
@@ -58,6 +60,14 @@ class GameScene: SKScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         createTree()
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
+            print("Teve contato aqui")
+        }
     }
 }
 
