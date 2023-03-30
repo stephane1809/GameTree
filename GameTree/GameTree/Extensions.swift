@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
 extension View {
     func popupNavigationView<Content: View>(horizontalPadding: CGFloat = 100,
                                             show: Binding<Bool>,
@@ -28,11 +29,26 @@ extension View {
                         NavigationView {
                             content()
                         }
-                        .frame(width: size.width - horizontalPadding, height: size.height/4, alignment: .center)
+                        .frame(width: size.width - horizontalPadding, height: size.height/2, alignment: .center)
                         .cornerRadius(15)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     }
                 }
             }
+    }
+    func scaledFont(name: String, size: Double) -> some View {
+        return self.modifier(ScaledFont(name: name, size: size))
+    }
+}
+
+@available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
+struct ScaledFont: ViewModifier {
+    @Environment(\.sizeCategory) var sizeCategory
+    var name: String
+    var size: Double
+
+    func body(content: Content) -> some View {
+       let scaledSize = UIFontMetrics.default.scaledValue(for: size)
+        return content.font(.custom(name, size: scaledSize))
     }
 }

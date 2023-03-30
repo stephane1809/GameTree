@@ -19,15 +19,16 @@ struct GameView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
-                Text("GameView")
-                    .font(.largeTitle)
+//                Text("GameView")
+//                    .scaledFont(name: "Georgia", size: 11)
+                GameplayView()
             }
             .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
                 pauseView
                     .toolbar {
                         ToolbarItem(placement: .principal) {
                             Text("Pause")
-                                .font(.largeTitle)
+                                .scaledFont(name: "Georgia", size: 34)
                                 .fontWeight(.bold)
                         }
                     }
@@ -50,7 +51,11 @@ struct GameView: View {
     var titlePoints: some View {
         HStack {
             Image(systemName: "tree")
+                .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 28)
             Text("\(points)")
+                .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 28)
         }
     }
     var buttonPause: some View {
@@ -64,21 +69,28 @@ struct GameView: View {
         }
     }
     var remainingLifes: some View {
-        HStack {
-            Image(systemName: "heart")
+        HStack(spacing: 3) {
+            Image(systemName: "heart.fill")
                 .foregroundColor(.black)
-            Image(systemName: "heart")
+                .scaledFont(name: "Georgia", size: 17)
+            Image(systemName: "heart.fill")
                 .foregroundColor(.black)
-            Image(systemName: "heart")
+                .scaledFont(name: "Georgia", size: 17)
+            Image(systemName: "heart.fill")
                 .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 17)
         }
     }
     var pauseView: some View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
                 Text("Record")
+                    .foregroundColor(.black)
+                    .scaledFont(name: "Georgia", size: 17)
 
                 Text("\(points)")
+                    .foregroundColor(.black)
+                    .scaledFont(name: "Georgia", size: 17)
             }
             HStack(alignment: .center, spacing: 20) {
                 Button {
@@ -89,8 +101,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: "play.fill")
                             .foregroundColor(.black)
-                            .font(.title2)
+                            .scaledFont(name: "Georgia", size: 11)
                         Text("Play")
+                            .foregroundColor(.black)
+                            .scaledFont(name: "Georgia", size: 11)
                     }
                 }
                 Button {
@@ -100,8 +114,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: "arrow.clockwise")
                             .foregroundColor(.black)
-                            .font(.title2)
+                            .scaledFont(name: "Georgia", size: 11)
                         Text("Replay")
+                            .foregroundColor(.black)
+                            .scaledFont(name: "Georgia", size: 11)
                     }
                 }
                 Button {
@@ -112,8 +128,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: isSelected ? selected : notSelected)
                             .foregroundColor(.black)
-                            .font(.title2)
+                            .scaledFont(name: "Georgia", size: 11)
                         Text("Sound")
+                            .foregroundColor(.black)
+                            .scaledFont(name: "Georgia", size: 11)
                     }
                 }
             }
