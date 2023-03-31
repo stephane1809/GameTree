@@ -6,43 +6,62 @@
 //
 
 import SwiftUI
+import SpriteKit
 
 struct GameView: View {
 
-    var points: Int = 23
+    // o que é pra acontecer se houver mudanca de pontos?
+    // comparar com valor salvo no userdefaults(game center dps)
+
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
 
     @State var showingPopup = false
+    @State var isGameOver: Bool = false
+    // o que é pra acontecer se o jogo terminar:
+    // é pra salvar o valor
+    // comparar o valor com oq ta salvo no user defaults
+    // surgir o popup sem o play de continuar jogando
+    // mudar a gravidade do jogo para zero pra animação parar
+
     @State var isSelected: Bool = true
+    // quando eu selecionar oq é pra acontecer?
+    // é pra desligar o audio do aplicativo --> fazer um didSet
+
+    @StateObject var scene: GameScene = {
+            let scene = GameScene()
+            scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            scene.scaleMode = .fill
+            scene.backgroundColor = .white
+            scene.physicsWorld.gravity = CGVector(dx: 0, dy: -1)
+            return scene
+        }()
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .center, spacing: 20) {
-                GameplayView()
-            }
-            .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
-                pauseView
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Text("Pause")
-                                .scaledFont(name: "Georgia", size: 34)
-                                .fontWeight(.bold)
+            SpriteView(scene: scene)
+                .ignoresSafeArea(.all)
+                .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
+                    pauseView
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Text("Pause")
+                                    .scaledFont(name: "Georgia", size: 34)
+                                    .fontWeight(.bold)
+                            }
                         }
+                })
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        titlePoints
                     }
-            })
-
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    titlePoints
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        buttonPause
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        remainingLifes
+                    }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    buttonPause
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    remainingLifes
-                }
-            }
         }
     }
 
@@ -51,7 +70,7 @@ struct GameView: View {
             Image(systemName: "tree")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
-            Text("\(points)")
+            Text("\(scene.counterTree)")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
         }
@@ -86,7 +105,7 @@ struct GameView: View {
                     .foregroundColor(.black)
                     .scaledFont(name: "Georgia", size: 17)
 
-                Text("\(points)")
+                Text("\(scene.counterTree)")
                     .foregroundColor(.black)
                     .scaledFont(name: "Georgia", size: 17)
             }
