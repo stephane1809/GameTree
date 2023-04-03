@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene, ObservableObject {
 
     @Published var counterTree: Int = 0
+    var incrementGravity: Double = 0.0
     var counterFall: Int = 0
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -19,8 +20,13 @@ class GameScene: SKScene, ObservableObject {
             while true {
                 try? await Task.sleep(for: .seconds(0.5))
                 createTree()
+                incrementGravity += 0.1
             }
         }
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1 - incrementGravity)
     }
 
     func createTree() {
