@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    var record: Int = 23
+    var record = UserDefaults.standard.integer(forKey: "records")
 
     var tapped: String = ""
     @State var isSelected: Bool = true
