@@ -10,11 +10,12 @@ import SpriteKit
 
 class GameScene: SKScene, ObservableObject {
 
-    @Published var counterTree: Int = 0
-    var counterFall: Int = 0
+    var gameModel = GameModel.shared
+
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
+                print(gameModel.record)
         Task {
             while true {
                 try? await Task.sleep(for: .seconds(0.5))
@@ -63,9 +64,10 @@ class GameScene: SKScene, ObservableObject {
             let touchedNode = self.atPoint(location)
 
             if touchedNode.name == "tree" {
-                counterTree += 1
-
-                UserDefaults.standard.set(counterTree, forKey: "records")
+                gameModel.counterTree += 1
+                if gameModel.counterTree > gameModel.record {
+                    UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
+                }
                 touchedNode.removeFromParent()
             }
         }
@@ -81,8 +83,9 @@ extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
-            counterFall += 1
-            if counterFall >= 3 {
+            gameModel.counterFall += 1
+            if gameModel.counterFall >= 3 {
+//                print(gameModel.counterFall)
             }
         }
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
 
-    var record = UserDefaults.standard.integer(forKey: "records")
 
     var tapped: String = ""
+    @StateObject var gameModel = GameModel()
     @State var isSelected: Bool = true
 
     var selected = "speaker.wave.3.fill"
@@ -46,19 +46,19 @@ struct ContentView: View {
                 .scaledFont(name: "Georgia", size: 17)
         }
     }
-
+    @ViewBuilder
     var recordsView: some View {
-        HStack {
-            Text("\(record)")
-                .scaledFont(name: "Georgia", size: 34)
-            Image(systemName: "tree")
+            HStack {
+                Text("\(gameModel.record)")
+                    .scaledFont(name: "Georgia", size: 34)
+                Image(systemName: "tree")
 
-                .foregroundColor(.green)
-                .scaledFont(name: "Georgia", size: 34)
-        }
+                    .foregroundColor(.green)
+                    .scaledFont(name: "Georgia", size: 34)
+            }
     }
     var navigation: some View {
-        NavigationLink(destination: GameView().navigationBarBackButtonHidden(), label: {
+        NavigationLink(destination: GameView(), label: {
                 HStack {
                     Text("Play")
                         .foregroundColor(.black)
