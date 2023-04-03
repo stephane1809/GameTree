@@ -20,7 +20,7 @@ class GameScene: SKScene, ObservableObject {
             while true {
                 try? await Task.sleep(for: .seconds(0.5))
                 createTree()
-                incrementGravity += 0.1
+                incrementGravity += 0.01
             }
         }
     }
