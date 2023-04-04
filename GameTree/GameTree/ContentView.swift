@@ -20,7 +20,7 @@ struct ContentView: View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
                 Text("RECORD")
-                    .scaledFont(name: "Georgia", size: 34)
+                    .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
                 recordsView
                 HStack(alignment: .center, spacing: 40) {
                     navigation
@@ -43,18 +43,18 @@ struct ContentView: View {
         } label: {
             Image(systemName: isSelected ? selected : notSelected)
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
+                .font(.custom("Georgia", size: 17, relativeTo: .headline))
         }
     }
     @ViewBuilder
     var recordsView: some View {
             HStack {
                 Text("\(gameModel.record)")
-                    .scaledFont(name: "Georgia", size: 34)
+                    .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
                 Image(systemName: "tree")
 
                     .foregroundColor(.green)
-                    .scaledFont(name: "Georgia", size: 34)
+                    .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
             }
     }
     var navigation: some View {
@@ -62,9 +62,9 @@ struct ContentView: View {
                 HStack {
                     Text("Play")
                         .foregroundColor(.black)
-                        .scaledFont(name: "Georgia", size: 34)
+                        .font(.custom("Georgia", size: 34, relativeTo: .title))
                     Image(systemName: "play.circle")
-                        .scaledFont(name: "Georgia", size: 34)
+                        .font(.custom("Georgia", size: 34, relativeTo: .title))
                           .foregroundColor(.black)
                 }
                 .frame(width: 150, height: 50)

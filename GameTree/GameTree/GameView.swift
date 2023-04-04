@@ -46,7 +46,7 @@ struct GameView: View {
                         .toolbar {
                             ToolbarItem(placement: .principal) {
                                 Text("Pause")
-                                    .scaledFont(name: "Georgia", size: 34)
+                                    .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
                                     .fontWeight(.bold)
                             }
                         }
@@ -67,13 +67,9 @@ struct GameView: View {
 
     var titlePoints: some View {
         HStack {
-            Image(systemName: "tree")
-                .foregroundColor(.black)
-//                .scaledFont(name: "Georgia", size: 28)
-                .font(.title)
             Text("\(gameModel.counterTree)")
                 .foregroundColor(.black)
-                .font(.custom("Georgia", size: 28, relativeTo: .title))
+                .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
         }
     }
     var buttonPause: some View {
@@ -90,13 +86,13 @@ struct GameView: View {
         HStack(spacing: 3) {
             Image(systemName: "heart.fill")
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
+                .font(.custom("Georgia", size: 17, relativeTo: .headline))
             Image(systemName: "heart.fill")
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
+                .font(.custom("Georgia", size: 17, relativeTo: .headline))
             Image(systemName: "heart.fill")
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
+                .font(.custom("Georgia", size: 17, relativeTo: .headline))
         }
     }
     var pauseView: some View {
@@ -104,11 +100,11 @@ struct GameView: View {
             HStack {
                 Text("Record")
                     .foregroundColor(.black)
-                    .scaledFont(name: "Georgia", size: 17)
+                    .font(.custom("Georgia", size: 17, relativeTo: .headline))
 
                 Text("\(gameModel.counterTree)")
                     .foregroundColor(.black)
-                    .scaledFont(name: "Georgia", size: 17)
+                    .font(.custom("Georgia", size: 17, relativeTo: .headline))
             }
             HStack(alignment: .center, spacing: 20) {
                 Button {
@@ -119,10 +115,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: "play.fill")
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                         Text("Play")
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                     }
                 }
                 Button {
@@ -132,10 +128,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: "arrow.clockwise")
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                         Text("Replay")
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                     }
                 }
                 Button {
@@ -146,10 +142,10 @@ struct GameView: View {
                     VStack {
                         Image(systemName: isSelected ? selected : notSelected)
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                         Text("Sound")
                             .foregroundColor(.black)
-                            .scaledFont(name: "Georgia", size: 11)
+                            .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                     }
                 }
             }
