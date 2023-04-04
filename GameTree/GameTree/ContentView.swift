@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
 
-
     var tapped: String = ""
     @StateObject var gameModel = GameModel()
     @State var isSelected: Bool = true
@@ -30,7 +29,6 @@ struct ContentView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     buttonMusic
                 }
-
             }
         }
     }
@@ -58,7 +56,7 @@ struct ContentView: View {
             }
     }
     var navigation: some View {
-        NavigationLink(destination: GameView(), label: {
+        NavigationLink(destination: GameView().navigationBarBackButtonHidden(true), label: {
                 HStack {
                     Text("Play")
                         .foregroundColor(.black)

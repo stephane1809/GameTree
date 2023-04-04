@@ -15,6 +15,7 @@ struct GameView: View {
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
+
     @StateObject var gameModel = GameModel.shared
 
     @State var showingPopup = false
@@ -24,11 +25,11 @@ struct GameView: View {
     // é pra desligar o audio do aplicativo --> fazer um didSet
 
     @StateObject var scene: GameScene = {
-            let scene = GameScene()
-            scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            scene.scaleMode = .fill
-            scene.backgroundColor = .white
-            return scene
+        let scene = GameScene()
+        scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
     }()
 
     var body: some View {
@@ -67,6 +68,9 @@ struct GameView: View {
                     }
                 }
         }
+        .onChange(of: gameModel.isPaused) { newValue in
+            scene.isPaused = newValue
+        }
     }
 
     var titlePoints: some View {
@@ -81,6 +85,7 @@ struct GameView: View {
     }
     var buttonPause: some View {
         Button {
+            gameModel.isPaused.toggle()
             withAnimation {
                 showingPopup.toggle()
             }
@@ -114,20 +119,22 @@ struct GameView: View {
                     .scaledFont(name: "Georgia", size: 17)
             }
             HStack(alignment: .center, spacing: 20) {
-//                Button {
-//                    withAnimation {
-//                        showingPopup.toggle()
-//                    }
-//                } label: {
-//                    VStack {
-//                        Image(systemName: "play.fill")
-//                            .foregroundColor(.black)
-//                            .scaledFont(name: "Georgia", size: 11)
-//                        Text("Play")
-//                            .foregroundColor(.black)
-//                            .scaledFont(name: "Georgia", size: 11)
-//                    }
-//                }
+                Button {
+                    gameModel.isPaused.toggle()
+                    withAnimation {
+                        showingPopup.toggle()
+                    }
+                } label: {
+                    VStack {
+                        Image(systemName: "play.fill")
+                            .foregroundColor(.black)
+                            .scaledFont(name: "Georgia", size: 11)
+                        Text("Play")
+                            .foregroundColor(.black)
+                            .scaledFont(name: "Georgia", size: 11)
+                    }
+                }
+
                 Button {
 
                 } label: {
@@ -158,6 +165,7 @@ struct GameView: View {
             }
         }
     }
+
 }
 
 struct GameView_Previews: PreviewProvider {
