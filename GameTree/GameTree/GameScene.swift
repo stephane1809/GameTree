@@ -79,10 +79,10 @@ class GameScene: SKScene, ObservableObject {
         }
     }
 
-    func saveGameOver() {
-        let counterRecords = UserDefaults.standard.integer(forKey: "records")
-        print("as arvores tocadas foram: \(counterRecords)")
+    func gameOver() {
+        gameModel.isGameOver = true
     }
+
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -90,8 +90,8 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
-            if gameModel.counterFall >= 3 {
-//                print(gameModel.counterFall)
+            if gameModel.counterFall == 3 {
+                gameOver()
             }
         }
     }
