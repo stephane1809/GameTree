@@ -15,14 +15,15 @@ struct GameView: View {
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
+    @StateObject var gameModel = GameModel.shared
 
     @State var showingPopup = false
-    @State var isGameOver: Bool = false
     // o que é pra acontecer se o jogo terminar:
     // é pra salvar o valor
     // comparar o valor com oq ta salvo no user defaults
     // surgir o popup sem o play de continuar jogando
     // mudar a gravidade do jogo para zero pra animação parar
+    // parar a criação de arvore
 
     @State var isSelected: Bool = true
     // quando eu selecionar oq é pra acontecer?
@@ -34,7 +35,7 @@ struct GameView: View {
             scene.scaleMode = .fill
             scene.backgroundColor = .white
             return scene
-        }()
+    }()
 
     var body: some View {
         NavigationView {
@@ -69,7 +70,7 @@ struct GameView: View {
             Image(systemName: "tree")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
-            Text("\(scene.counterTree)")
+            Text("\(gameModel.counterTree)")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
         }
@@ -104,7 +105,7 @@ struct GameView: View {
                     .foregroundColor(.black)
                     .scaledFont(name: "Georgia", size: 17)
 
-                Text("\(scene.counterTree)")
+                Text("\(gameModel.counterTree)")
                     .foregroundColor(.black)
                     .scaledFont(name: "Georgia", size: 17)
             }
