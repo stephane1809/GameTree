@@ -69,10 +69,11 @@ struct GameView: View {
         HStack {
             Image(systemName: "tree")
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 28)
+//                .scaledFont(name: "Georgia", size: 28)
+                .font(.title)
             Text("\(gameModel.counterTree)")
                 .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 28)
+                .font(.custom("Georgia", size: 28, relativeTo: .title))
         }
     }
     var buttonPause: some View {
