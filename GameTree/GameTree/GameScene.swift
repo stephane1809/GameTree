@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import SpriteKit
 
 class GameScene: SKScene, ObservableObject {
@@ -16,38 +17,42 @@ class GameScene: SKScene, ObservableObject {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
-                print(gameModel.record)
-        Task {
-            while true {
-                try? await Task.sleep(for: .seconds(0.5))
-                createTree()
-                incrementGravity += 0.01
-            }
+    }
+
+    var lastTreeCreation: TimeInterval = .zero
+
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+
+        if gameModel.isPaused == false {
+            physicsWorld.gravity = CGVector(dx: 0, dy: -1 - incrementGravity)
+        }
+
+        print(currentTime - lastTreeCreation)
+        if currentTime - lastTreeCreation > 0.5 {
+            createTree()
+            incrementGravity += 0.01
+            lastTreeCreation = currentTime
         }
     }
 
-    override func update(_ currentTime: TimeInterval) {
-        physicsWorld.gravity = CGVector(dx: 0, dy: -1 - incrementGravity)
-    }
-
     func createTree() {
-        let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
-        let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 1400), CGPoint(x: 332, y: 1100)]
+            let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
+            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 1400), CGPoint(x: 332, y: 1100)]
 
-        let tree = SKSpriteNode(imageNamed: "lofiTree")
-        tree.name = "tree"
-        tree.size = treeSizes.randomElement()!
-        tree.position = treePositions.randomElement()!
+            let tree = SKSpriteNode(imageNamed: "lofiTree")
+            tree.name = "tree"
+            tree.size = treeSizes.randomElement()!
+            tree.position = treePositions.randomElement()!
 
-        // physics property
-        tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
-        tree.physicsBody?.isDynamic = true
-        tree.physicsBody!.affectedByGravity = true
-        tree.physicsBody!.usesPreciseCollisionDetection = false
-        tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
-        tree.physicsBody?.collisionBitMask = 0
-        self.addChild(tree)
-        // Animations
+            // physics property
+            tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
+            tree.physicsBody?.isDynamic = true
+            tree.physicsBody!.affectedByGravity = true
+            tree.physicsBody!.usesPreciseCollisionDetection = false
+            tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
+            tree.physicsBody?.collisionBitMask = 0
+            self.addChild(tree)
     }
 
     func addLaserFloor() {
@@ -62,7 +67,7 @@ class GameScene: SKScene, ObservableObject {
         laser.name = "Laser"
 
         addChild(laser)
-       }
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -78,11 +83,6 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
-
-    func saveGameOver() {
-        let counterRecords = UserDefaults.standard.integer(forKey: "records")
-        print("as arvores tocadas foram: \(counterRecords)")
-    }
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -91,7 +91,6 @@ extension GameScene: SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
             if gameModel.counterFall >= 3 {
-//                print(gameModel.counterFall)
             }
         }
     }
