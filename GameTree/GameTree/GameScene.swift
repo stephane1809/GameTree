@@ -83,6 +83,11 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
+
+    func gameOver() {
+        gameModel.isGameOver = true
+    }
+
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -90,7 +95,8 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
-            if gameModel.counterFall >= 3 {
+            if gameModel.counterFall == 3 {
+                gameOver()
             }
         }
     }

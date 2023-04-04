@@ -19,12 +19,6 @@ struct GameView: View {
     @StateObject var gameModel = GameModel.shared
 
     @State var showingPopup = false
-    // o que é pra acontecer se o jogo terminar:
-    // é pra salvar o valor
-    // comparar o valor com oq ta salvo no user defaults
-    // surgir o popup sem o play de continuar jogando
-    // mudar a gravidade do jogo para zero pra animação parar
-    // parar a criação de arvore
 
     @State var isSelected: Bool = true
     // quando eu selecionar oq é pra acontecer?
@@ -42,11 +36,21 @@ struct GameView: View {
         NavigationView {
             SpriteView(scene: scene)
                 .ignoresSafeArea(.all)
+                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
+                    pauseView
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Text(gameModel.isGameOver ? "Game Over" : "Pause")
+                                    .scaledFont(name: "Georgia", size: 34)
+                                    .fontWeight(.bold)
+                            }
+                        }
+                })
                 .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
-                                Text("Pause")
+                                Text(gameModel.isGameOver ? "Game Over" : "Pause")
                                     .scaledFont(name: "Georgia", size: 34)
                                     .fontWeight(.bold)
                             }
@@ -57,7 +61,7 @@ struct GameView: View {
                         titlePoints
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        buttonPause
+                        gameModel.isGameOver ? nil : buttonPause
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         remainingLifes
@@ -130,6 +134,7 @@ struct GameView: View {
                             .scaledFont(name: "Georgia", size: 11)
                     }
                 }
+
                 Button {
 
                 } label: {
