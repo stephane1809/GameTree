@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import SwiftUI
 
 class GameScene: SKScene, ObservableObject {
 
@@ -74,7 +75,10 @@ class GameScene: SKScene, ObservableObject {
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
                 }
+                let softHaptics = UIImpactFeedbackGenerator(style: .light)
+                softHaptics.impactOccurred()
                 touchedNode.removeFromParent()
+
             }
         }
     }
