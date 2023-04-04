@@ -34,7 +34,6 @@ struct GameView: View {
             scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             scene.scaleMode = .fill
             scene.backgroundColor = .white
-            scene.physicsWorld.gravity = CGVector(dx: 0, dy: -1)
             return scene
     }()
 
