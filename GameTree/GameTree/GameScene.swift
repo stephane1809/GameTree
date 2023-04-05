@@ -13,22 +13,19 @@ class GameScene: SKScene, ObservableObject {
 
     var gameModel = GameModel.shared
     var incrementGravity: Double = 0.0
+    var lastTreeCreation: TimeInterval = .zero
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
     }
 
-    var lastTreeCreation: TimeInterval = .zero
-
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
 
-        if gameModel.isPaused == false {
+        if gameModel.isPaused == false || gameModel.isGameOver == false {
             physicsWorld.gravity = CGVector(dx: 0, dy: -1 - incrementGravity)
         }
-
-        print(currentTime - lastTreeCreation)
         if currentTime - lastTreeCreation > 0.5 {
             createTree()
             incrementGravity += 0.01
@@ -86,6 +83,7 @@ class GameScene: SKScene, ObservableObject {
 
     func gameOver() {
         gameModel.isGameOver = true
+
     }
 
 }

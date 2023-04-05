@@ -36,7 +36,7 @@ struct GameView: View {
         NavigationView {
             SpriteView(scene: scene)
                 .ignoresSafeArea(.all)
-                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
+                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver , content: {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
@@ -68,7 +68,7 @@ struct GameView: View {
                     }
                 }
         }
-        .onChange(of: gameModel.isPaused) { newValue in
+        .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
             scene.isPaused = newValue
         }
     }
@@ -119,9 +119,10 @@ struct GameView: View {
                     .scaledFont(name: "Georgia", size: 17)
             }
             HStack(alignment: .center, spacing: 20) {
-                Button {
+                gameModel.isGameOver ? nil : Button {
                     gameModel.isPaused.toggle()
                     withAnimation {
+                        gameModel.isGameOver = false
                         showingPopup.toggle()
                     }
                 } label: {
@@ -129,7 +130,7 @@ struct GameView: View {
                         Image(systemName: "play.fill")
                             .foregroundColor(.black)
                             .scaledFont(name: "Georgia", size: 11)
-                        Text("Play")
+                        Text("Continue")
                             .foregroundColor(.black)
                             .scaledFont(name: "Georgia", size: 11)
                     }
