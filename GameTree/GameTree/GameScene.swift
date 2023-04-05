@@ -24,9 +24,9 @@ class GameScene: SKScene, ObservableObject {
         super.update(currentTime)
 
         if gameModel.isPaused == false || gameModel.isGameOver == false {
-            physicsWorld.gravity = CGVector(dx: 0, dy: -1 - incrementGravity)
+            physicsWorld.gravity = CGVector(dx: 0, dy: -0.1 - incrementGravity)
         }
-        if currentTime - lastTreeCreation > 0.5 {
+        if currentTime - lastTreeCreation > 0.9 {
             createTree()
             incrementGravity += 0.01
             lastTreeCreation = currentTime
@@ -81,10 +81,9 @@ class GameScene: SKScene, ObservableObject {
         }
     }
 
-    func gameOver() {
-        gameModel.isGameOver = true
-
-    }
+//    func gameOver() {
+//        gameModel.isGameOver = true
+//    }
 
 }
 
@@ -93,8 +92,14 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
+            if gameModel.counterFall == 1 {
+                gameModel.lifesOverOne = true
+            }
+            if gameModel.counterFall == 2 {
+                gameModel.lifesOverTwo = true
+            }
             if gameModel.counterFall == 3 {
-                gameOver()
+                gameModel.isGameOver = true
             }
         }
     }

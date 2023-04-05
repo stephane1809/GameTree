@@ -10,6 +10,8 @@ import Foundation
 class GameModel: ObservableObject {
     @Published var counterTree: Int = 0
     @Published var counterFall: Int = 0
+    @Published var lifesOverOne: Bool = false
+    @Published var lifesOverTwo: Bool = false
     @Published var isGameOver: Bool = false
     @Published var isPaused: Bool = false
     @Published var record = UserDefaults.standard.integer(forKey: "tree")
