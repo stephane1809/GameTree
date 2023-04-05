@@ -24,7 +24,7 @@ class GameScene: SKScene, ObservableObject {
         super.update(currentTime)
 
         if gameModel.isPaused == false || gameModel.isGameOver == false {
-            physicsWorld.gravity = CGVector(dx: 0, dy: -0.1 - incrementGravity)
+            physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
         }
         if currentTime - lastTreeCreation > 0.9 {
             createTree()

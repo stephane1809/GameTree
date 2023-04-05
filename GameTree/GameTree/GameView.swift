@@ -36,7 +36,7 @@ struct GameView: View {
         NavigationView {
             SpriteView(scene: scene)
                 .ignoresSafeArea(.all)
-                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver , content: {
+                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
@@ -70,7 +70,9 @@ struct GameView: View {
         }
         .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
             scene.isPaused = newValue
+            print(newValue)
         }
+
     }
 
     var titlePoints: some View {
@@ -97,29 +99,18 @@ struct GameView: View {
     var remainingLifes: some View {
         HStack(spacing: 3) {
 
-            gameModel.isGameOver ?
-            Image(systemName: "heart")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-            : Image(systemName: "heart.fill")
+            Image(systemName: gameModel.isGameOver ? "heart" : "heart.fill")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
 
-            gameModel.lifesOverTwo ?
-            Image(systemName: "heart")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-            : Image(systemName: "heart.fill")
+            Image(systemName: gameModel.lifesOverTwo ? "heart" : "heart.fill")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
 
-            gameModel.lifesOverOne ?
-            Image(systemName: "heart")
+            Image(systemName: gameModel.lifesOverOne ? "heart" : "heart.fill")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
-            : Image(systemName: "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
+
         }
     }
     var pauseView: some View {
@@ -135,10 +126,10 @@ struct GameView: View {
             }
             HStack(alignment: .center, spacing: 20) {
                 gameModel.isGameOver ? nil : Button {
-                    gameModel.isPaused.toggle()
                     withAnimation {
                         gameModel.isGameOver = false
                         showingPopup.toggle()
+                        gameModel.isPaused.toggle()
                     }
                 } label: {
                     VStack {
