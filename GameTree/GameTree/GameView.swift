@@ -41,7 +41,7 @@ struct GameView: View {
                         .toolbar {
                             ToolbarItem(placement: .principal) {
                                 Text(gameModel.isGameOver ? "Game Over" : "Pause")
-                                    .scaledFont(name: "Georgia", size: 34)
+                                    .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
                                     .fontWeight(.bold)
                             }
                         }
