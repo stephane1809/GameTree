@@ -15,32 +15,37 @@ struct GameView: View {
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
+
     @StateObject var gameModel = GameModel.shared
 
     @State var showingPopup = false
-    // o que é pra acontecer se o jogo terminar:
-    // é pra salvar o valor
-    // comparar o valor com oq ta salvo no user defaults
-    // surgir o popup sem o play de continuar jogando
-    // mudar a gravidade do jogo para zero pra animação parar
-    // parar a criação de arvore
 
     @State var isSelected: Bool = true
     // quando eu selecionar oq é pra acontecer?
     // é pra desligar o audio do aplicativo --> fazer um didSet
 
     @StateObject var scene: GameScene = {
-            let scene = GameScene()
-            scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            scene.scaleMode = .fill
-            scene.backgroundColor = .white
-            return scene
+        let scene = GameScene()
+        scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
     }()
 
     var body: some View {
         NavigationView {
             SpriteView(scene: scene)
                 .ignoresSafeArea(.all)
+                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver , content: {
+                    pauseView
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Text(gameModel.isGameOver ? "Game Over" : "Pause")
+                                    .scaledFont(name: "Georgia", size: 34)
+                                    .fontWeight(.bold)
+                            }
+                        }
+                })
                 .popupNavigationView(horizontalPadding: 100, show: $showingPopup, content: {
                     pauseView
                         .toolbar {
@@ -56,12 +61,15 @@ struct GameView: View {
                         titlePoints
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        buttonPause
+                        gameModel.isGameOver ? nil : buttonPause
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         remainingLifes
                     }
                 }
+        }
+        .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
+            scene.isPaused = newValue
         }
     }
 
@@ -74,6 +82,7 @@ struct GameView: View {
     }
     var buttonPause: some View {
         Button {
+            gameModel.isPaused.toggle()
             withAnimation {
                 showingPopup.toggle()
             }
@@ -107,8 +116,10 @@ struct GameView: View {
                     .font(.custom("Georgia", size: 17, relativeTo: .headline))
             }
             HStack(alignment: .center, spacing: 20) {
-                Button {
+                gameModel.isGameOver ? nil : Button {
+                    gameModel.isPaused.toggle()
                     withAnimation {
+                        gameModel.isGameOver = false
                         showingPopup.toggle()
                     }
                 } label: {
@@ -121,6 +132,7 @@ struct GameView: View {
                             .font(.custom("Georgia", size: 11, relativeTo: .caption2))
                     }
                 }
+
                 Button {
 
                 } label: {
@@ -151,6 +163,7 @@ struct GameView: View {
             }
         }
     }
+
 }
 
 struct GameView_Previews: PreviewProvider {
