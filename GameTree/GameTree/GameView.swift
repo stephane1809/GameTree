@@ -96,13 +96,28 @@ struct GameView: View {
     }
     var remainingLifes: some View {
         HStack(spacing: 3) {
-            Image(systemName: "heart.fill")
+
+            gameModel.isGameOver ?
+            Image(systemName: "heart")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
-            Image(systemName: "heart.fill")
+            : Image(systemName: "heart.fill")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
-            Image(systemName: "heart.fill")
+
+            gameModel.lifesOverTwo ?
+            Image(systemName: "heart")
+                .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 17)
+            : Image(systemName: "heart.fill")
+                .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 17)
+
+            gameModel.lifesOverOne ?
+            Image(systemName: "heart")
+                .foregroundColor(.black)
+                .scaledFont(name: "Georgia", size: 17)
+            : Image(systemName: "heart.fill")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
         }
