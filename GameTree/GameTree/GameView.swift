@@ -29,6 +29,8 @@ struct GameView: View {
         scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         scene.scaleMode = .fill
         scene.backgroundColor = .white
+        scene.isPaused = true
+        print(scene.isPaused)
         return scene
     }()
 
