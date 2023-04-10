@@ -15,6 +15,20 @@ class GameScene: SKScene, ObservableObject {
     var incrementGravity: Double = 0.0
     var lastTreeCreation: TimeInterval = .zero
 
+    var realPaused: Bool = false {
+        didSet {
+            self.isPaused = realPaused
+        }
+    }
+
+    override var isPaused: Bool {
+        didSet {
+            if (self.isPaused == false && self.realPaused == true) {
+                self.isPaused = true
+            }
+        }
+    }
+
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
@@ -22,15 +36,17 @@ class GameScene: SKScene, ObservableObject {
 
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        print("game scene \(gameModel.isPaused)" )
 
-        if gameModel.isPaused == false || gameModel.isGameOver == false {
-            physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
-        }
-        if currentTime - lastTreeCreation > 0.9 {
+        if gameModel.isPaused == false && gameModel.isGameOver == false && currentTime - lastTreeCreation > 0.9 {
+            print("entrou na mudança da gravidade")
             createTree()
             incrementGravity += 0.01
             lastTreeCreation = currentTime
+            physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
+
         }
+
     }
 
     func createTree() {
@@ -80,10 +96,6 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
-
-//    func gameOver() {
-//        gameModel.isGameOver = true
-//    }
 
 }
 

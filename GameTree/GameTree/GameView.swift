@@ -18,6 +18,7 @@ struct GameView: View {
 
     @StateObject var gameModel = GameModel.shared
 
+
     @State var showingPopup = false
 
     @State var isSelected: Bool = true
@@ -29,8 +30,8 @@ struct GameView: View {
         scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         scene.scaleMode = .fill
         scene.backgroundColor = .white
-        scene.isPaused = true
-        print(scene.isPaused)
+//        scene.isPaused = true
+        print("entrei na scene")
         return scene
     }()
 
@@ -71,7 +72,7 @@ struct GameView: View {
                 }
         }
         .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
-            scene.isPaused = newValue
+            scene.realPaused = newValue
             print(newValue)
         }
 

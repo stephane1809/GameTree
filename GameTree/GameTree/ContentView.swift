@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
 
     var tapped: String = ""
-    @StateObject var gameModel = GameModel()
+    @StateObject var gameModel = GameModel.shared
     @State var isSelected: Bool = true
 
     var selected = "speaker.wave.3.fill"
