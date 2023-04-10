@@ -16,23 +16,16 @@ struct GameView: View {
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
 
-    @StateObject var gameModel = GameModel.shared
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    @State var gameModel = GameModel.shared
 
     @State var showingPopup = false
-
     @State var isSelected: Bool = true
     // quando eu selecionar oq é pra acontecer?
     // é pra desligar o audio do aplicativo --> fazer um didSet
 
-    @StateObject var scene: GameScene = {
-        let scene = GameScene()
-        scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        scene.scaleMode = .fill
-        scene.backgroundColor = .white
-//        scene.isPaused = true
-        print("entrei na scene")
-        return scene
-    }()
+    @State var scene: GameScene = .makeFullscreenScene()
 
     var body: some View {
         NavigationView {
@@ -42,7 +35,7 @@ struct GameView: View {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
-                                Text(gameModel.isGameOver ? "Game Over" : "Pause")
+                                Text(gameModel.isGameOver ? "Game Over" : "")
                                     .scaledFont(name: "Georgia", size: 34)
                                     .fontWeight(.bold)
                             }
@@ -52,7 +45,7 @@ struct GameView: View {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
-                                Text(gameModel.isGameOver ? "Game Over" : "Pause")
+                                Text(showingPopup ? "Pause" : "")
                                     .scaledFont(name: "Georgia", size: 34)
                                     .fontWeight(.bold)
                             }
@@ -72,9 +65,7 @@ struct GameView: View {
         }
         .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
             scene.realPaused = newValue
-            print(newValue)
         }
-
     }
 
     var titlePoints: some View {
@@ -121,6 +112,14 @@ struct GameView: View {
                 Text("Record")
                     .foregroundColor(.black)
                     .scaledFont(name: "Georgia", size: 17)
+                Text("\(gameModel.record)")
+                    .foregroundColor(.black)
+                    .scaledFont(name: "Georgia", size: 17)
+            }
+            HStack {
+                Text("Your scores")
+                    .foregroundColor(.black)
+                    .scaledFont(name: "Georgia", size: 17)
 
                 Text("\(gameModel.counterTree)")
                     .foregroundColor(.black)
@@ -145,9 +144,10 @@ struct GameView: View {
                 }
 
                 Button {
-
+                    scene = GameScene.makeFullscreenScene()
+                    scene.gameModel.reset()
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
-
                     VStack {
                         Image(systemName: "arrow.clockwise")
                             .foregroundColor(.black)
@@ -174,7 +174,6 @@ struct GameView: View {
             }
         }
     }
-
 }
 
 struct GameView_Previews: PreviewProvider {

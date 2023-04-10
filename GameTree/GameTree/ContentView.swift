@@ -55,20 +55,24 @@ struct ContentView: View {
                     .scaledFont(name: "Georgia", size: 34)
             }
     }
+
     var navigation: some View {
-        NavigationLink(destination: GameView().navigationBarBackButtonHidden(true), label: {
+
+        NavigationLink(
+            destination: GameView().navigationBarBackButtonHidden(),
+            label: {
                 HStack {
                     Text("Play")
                         .foregroundColor(.black)
                         .scaledFont(name: "Georgia", size: 34)
                     Image(systemName: "play.circle")
                         .scaledFont(name: "Georgia", size: 34)
-                          .foregroundColor(.black)
+                        .foregroundColor(.black)
                 }
                 .frame(width: 150, height: 50)
                 .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(.black, lineWidth: 2))
-        }
+            }
         )
     }
 }
