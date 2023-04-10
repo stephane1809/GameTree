@@ -15,6 +15,20 @@ class GameScene: SKScene, ObservableObject {
     var incrementGravity: Double = 0.0
     var lastTreeCreation: TimeInterval = .zero
 
+    var realPaused: Bool = false {
+        didSet {
+            self.isPaused = realPaused
+        }
+    }
+
+    override var isPaused: Bool {
+        didSet {
+            if (self.isPaused == false && self.realPaused == true) {
+                self.isPaused = true
+            }
+        }
+    }
+
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
@@ -22,20 +36,22 @@ class GameScene: SKScene, ObservableObject {
 
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        print("game scene \(gameModel.isPaused)" )
 
-        if gameModel.isPaused == false || gameModel.isGameOver == false {
-            physicsWorld.gravity = CGVector(dx: 0, dy: -0.1 - incrementGravity)
-        }
-        if currentTime - lastTreeCreation > 0.9 {
+        if gameModel.isPaused == false && gameModel.isGameOver == false && currentTime - lastTreeCreation > 0.9 {
+            print("entrou na mudança da gravidade")
             createTree()
             incrementGravity += 0.01
             lastTreeCreation = currentTime
+            physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
+
         }
+
     }
 
     func createTree() {
             let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
-            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 1400), CGPoint(x: 332, y: 1100)]
+            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 900), CGPoint(x: 332, y: 900)]
 
             let tree = SKSpriteNode(imageNamed: "lofiTree")
             tree.name = "tree"
@@ -80,10 +96,6 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
-
-//    func gameOver() {
-//        gameModel.isGameOver = true
-//    }
 
 }
 
