@@ -18,7 +18,6 @@ struct GameView: View {
 
     @StateObject var gameModel = GameModel.shared
 
-
     @State var showingPopup = false
 
     @State var isSelected: Bool = true

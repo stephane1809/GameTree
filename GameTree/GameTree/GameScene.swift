@@ -51,7 +51,7 @@ class GameScene: SKScene, ObservableObject {
 
     func createTree() {
             let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
-            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 800), CGPoint(x: 264, y: 800), CGPoint(x: 332, y: 800)]
+            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 900), CGPoint(x: 332, y: 900)]
 
             let tree = SKSpriteNode(imageNamed: "lofiTree")
             tree.name = "tree"
