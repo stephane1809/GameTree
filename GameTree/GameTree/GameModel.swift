@@ -14,6 +14,17 @@ class GameModel: ObservableObject {
     @Published var lifesOverTwo: Bool = false
     @Published var isGameOver: Bool = false
     @Published var isPaused: Bool = false
-    @Published var record = UserDefaults.standard.integer(forKey: "tree")
+
+    var record: Int { UserDefaults.standard.integer(forKey: "tree") }
+
     static let shared = GameModel()
+
+    func reset() {
+        self.counterTree = 0
+        self.counterFall = 0
+        self.lifesOverOne = false
+        self.lifesOverTwo = false
+        self.isGameOver = false
+        self.isPaused = false
+    }
 }

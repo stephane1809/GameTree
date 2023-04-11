@@ -23,7 +23,7 @@ class GameScene: SKScene, ObservableObject {
 
     override var isPaused: Bool {
         didSet {
-            if (self.isPaused == false && self.realPaused == true) {
+            if self.isPaused == false && self.realPaused == true {
                 self.isPaused = true
             }
         }
@@ -36,17 +36,23 @@ class GameScene: SKScene, ObservableObject {
 
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
-        print("game scene \(gameModel.isPaused)" )
-
         if gameModel.isPaused == false && gameModel.isGameOver == false && currentTime - lastTreeCreation > 0.9 {
-            print("entrou na mudança da gravidade")
             createTree()
             incrementGravity += 0.01
             lastTreeCreation = currentTime
             physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
-
         }
+    }
 
+    static func makeFullscreenScene() -> GameScene {
+        let scene = GameScene()
+        scene.size = CGSize(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height
+        )
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
     }
 
     func createTree() {
@@ -96,7 +102,6 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
-
 }
 
 extension GameScene: SKPhysicsContactDelegate {
