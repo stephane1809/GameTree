@@ -17,6 +17,7 @@ struct ContentView: View {
     var notSelected = "speaker.slash.fill"
     var body: some View {
         CustomView()
+            
 //        NavigationView {
 //            VStack(alignment: .center, spacing: 20) {
 //                Text("RECORD")
