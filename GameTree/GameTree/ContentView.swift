@@ -16,21 +16,22 @@ struct ContentView: View {
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
     var body: some View {
-        NavigationView {
-            VStack(alignment: .center, spacing: 20) {
-                Text("RECORD")
-                    .scaledFont(name: "Georgia", size: 34)
-                recordsView
-                HStack(alignment: .center, spacing: 40) {
-                    navigation
-                    }
-                }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    buttonMusic
-                }
-            }
-        }
+        CustomView()
+//        NavigationView {
+//            VStack(alignment: .center, spacing: 20) {
+//                Text("RECORD")
+//                    .scaledFont(name: "Georgia", size: 34)
+//                recordsView
+//                HStack(alignment: .center, spacing: 40) {
+//                    navigation
+//                    }
+//                }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    buttonMusic
+//                }
+//            }
+//        }
     }
 
     var buttonMusic: some View {
