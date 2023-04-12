@@ -14,7 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
         authenticateUser()
-        showAchievements()
+//        showAchievements()
+//        showLeaderboards()
 //        view.addSubview(buttonAnchievements)
 //        setUpConstraints()
         print("aqui1")
@@ -60,8 +61,8 @@ extension ViewController {
                     print(error?.localizedDescription ?? "")
                     return
                 }
-                if let vc = viewController {
-                    self.present(vc, animated: true, completion: nil)
+                if let gameCenterViewController = viewController {
+                    self.present(gameCenterViewController, animated: true, completion: nil)
                 }
             }
         }
