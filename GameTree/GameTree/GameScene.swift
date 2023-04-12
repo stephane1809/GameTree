@@ -97,9 +97,10 @@ class GameScene: SKScene, ObservableObject {
 
             if touchedNode.name == "tree" {
                 gameModel.counterTree += 1
+                gameCenter.saveAchievement()
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
-                    gameCenter.saveGameCenterRecord(record: gameModel.counterTree)
+                    gameCenter.saveGameCenterLeaderboard(record: gameModel.counterTree)
 //                    print(GKLeader)
                 }
                 touchedNode.removeFromParent()

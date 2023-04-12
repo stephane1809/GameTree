@@ -75,7 +75,7 @@ extension ViewController {
         print("aqui2")
     }
 
-    func saveGameCenterRecord (record: Int) {
+    func saveGameCenterLeaderboard (record: Int) {
         if GKLocalPlayer.local.isAuthenticated {
             GKLeaderboard.submitScore(record, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["topranking"], completionHandler: {
                 error in
@@ -91,6 +91,35 @@ extension ViewController {
         }
     }
 
+    func saveAchievement() {
+        
+        GKAchievement.loadAchievements(completionHandler: {
+            (achievements: [GKAchievement]?, error: Error?) in
+            print(achievements?.count, error)
+            let achievementID = "littlehero"
+            var achievement: GKAchievement? = nil
+
+            achievement = achievements?.first(where: { $0.identifier == achievementID})
+            achievement?.percentComplete = achievement!.percentComplete + Double(5)
+
+            if achievement == nil {
+                achievement = GKAchievement(identifier: achievementID)
+            }
+
+            if error != nil {
+                print("Error: \(String(describing: error))")
+            }
+
+            let achievementsToReport: [GKAchievement] = [achievement!]
+
+            GKAchievement.report(achievementsToReport, withCompletionHandler: {(error: Error?) in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+            })
+        })
+    }
+    
     func showLeaderboards() {
         let vc = GKGameCenterViewController()
         vc.gameCenterDelegate = self
@@ -104,19 +133,6 @@ extension ViewController {
         achievement.percentComplete = 100
         achievement.showsCompletionBanner = true
         GKAchievement.report([achievement]) { error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            print("Done")
-        }
-    }
-    
-    // sender aqui tb
-    func submit() {
-        let score = GKScore(leaderboardIdentifier: "topranking")
-        score.value = 100
-        GKScore.report([score]) { error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
                 return
