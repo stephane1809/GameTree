@@ -52,7 +52,6 @@ extension ViewController: GKGameCenterControllerDelegate {
 
 extension ViewController {
     func authenticateUser() {
-
         var isAutheticated = GKLocalPlayer.local.isAuthenticated
         if !isAutheticated {
             let player = GKLocalPlayer.local
