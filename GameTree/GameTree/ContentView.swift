@@ -13,6 +13,7 @@ struct ContentView: View {
     var tapped: String = ""
     @StateObject var gameModel = GameModel.shared
     @State var isSelected: Bool = true
+    let gameCenter = ViewController()
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
@@ -32,7 +33,7 @@ struct ContentView: View {
                 }
             }
         }.onAppear {
-            ViewController().authenticateUser()
+            gameCenter.authenticateUser()
         }
     }
 

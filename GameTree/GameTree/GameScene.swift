@@ -8,12 +8,14 @@
 import Foundation
 import SwiftUI
 import SpriteKit
+import GameKit
 
 class GameScene: SKScene, ObservableObject {
 
     var gameModel = GameModel.shared
     var incrementGravity: Double = 0.0
     var lastTreeCreation: TimeInterval = .zero
+    let gameCenter = ViewController()
 
     var realPaused: Bool = false {
         didSet {
@@ -97,6 +99,8 @@ class GameScene: SKScene, ObservableObject {
                 gameModel.counterTree += 1
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
+                    gameCenter.saveGameCenterRecord(record: gameModel.counterTree)
+//                    print(GKLeader)
                 }
                 touchedNode.removeFromParent()
             }

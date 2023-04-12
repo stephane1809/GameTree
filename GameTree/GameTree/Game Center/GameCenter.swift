@@ -75,7 +75,23 @@ extension ViewController {
         present(vc, animated: true, completion: nil)
         print("aqui2")
     }
-    
+
+    func saveGameCenterRecord (record: Int) {
+        if GKLocalPlayer.local.isAuthenticated {
+            GKLeaderboard.submitScore(record, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["topranking"], completionHandler: {
+                error in
+                
+                if error != nil {
+                    print(error!)
+                } else {
+                    print("Score \(record) submitted")
+                }
+            })
+        } else {
+            print("User not sign into Game Center")
+        }
+    }
+
     func showLeaderboards() {
         let vc = GKGameCenterViewController()
         vc.gameCenterDelegate = self
