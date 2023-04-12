@@ -107,6 +107,7 @@
 		4BD1B8CD29D4630C00E29A43 /* GameTree */ = {
 			isa = PBXGroup;
 			children = (
+				F850A16C29E5E337002DA351 /* Game Center */,
 				4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */,
 				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
 				45332C5229D4755000F151BF /* GameView.swift */,
@@ -116,8 +117,6 @@
 				4BD1B8D229D4630D00E29A43 /* Assets.xcassets */,
 				4BD1B8D429D4630D00E29A43 /* GameTree.entitlements */,
 				4BD1B8D529D4630D00E29A43 /* Preview Content */,
-				980F954029E5892400768836 /* GameCenter.swift */,
-				980F954229E58FEC00768836 /* UikitToSwiftUI.swift */,
 			);
 			path = GameTree;
 			sourceTree = "<group>";
@@ -145,6 +144,15 @@
 				4BD1B8EC29D4630D00E29A43 /* GameTreeUITestsLaunchTests.swift */,
 			);
 			path = GameTreeUITests;
+			sourceTree = "<group>";
+		};
+		F850A16C29E5E337002DA351 /* Game Center */ = {
+			isa = PBXGroup;
+			children = (
+				980F954029E5892400768836 /* GameCenter.swift */,
+				980F954229E58FEC00768836 /* UikitToSwiftUI.swift */,
+			);
+			path = "Game Center";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -13,6 +13,10 @@ struct CustomView: UIViewRepresentable {
         return ViewController().view
     }
 
+    func runUIView(context: Context) -> some UIViewController {
+        return ViewController()
+    }
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
         print("update")
     }

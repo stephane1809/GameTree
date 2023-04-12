@@ -9,14 +9,14 @@ import GameKit
 import UIKit
 
 class ViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-//        authenticateUser()
-//        showAchievements()
-        view.addSubview(buttonAnchievements)
-        setUpConstraints()
+        view.backgroundColor = .green
+        authenticateUser()
+        showAchievements()
+//        view.addSubview(buttonAnchievements)
+//        setUpConstraints()
         print("aqui1")
 
     }
@@ -32,10 +32,7 @@ class ViewController: UIViewController {
         return button
     }()
 
-
-    
-    
-    func setUpConstraints (){
+    func setUpConstraints () {
         NSLayoutConstraint.activate([
             buttonAnchievements.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonAnchievements.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -43,8 +40,6 @@ class ViewController: UIViewController {
             buttonAnchievements.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
-
-
 }
 
 extension ViewController: GKGameCenterControllerDelegate {
@@ -57,27 +52,30 @@ extension ViewController: GKGameCenterControllerDelegate {
 extension ViewController {
     func authenticateUser() {
 
-        let player = GKLocalPlayer.local
-        player.authenticateHandler = { vc, error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                return
+        var isAutheticated = GKLocalPlayer.local.isAuthenticated
+        if !isAutheticated {
+            let player = GKLocalPlayer.local
+            player.authenticateHandler = { viewController, error in
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                if let vc = viewController {
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
-            self.present(vc!, animated: true, completion: nil)
         }
-
     }
 
-    @objc func showAchievements() {
+    func showAchievements() {
         let vc = GKGameCenterViewController()
         vc.gameCenterDelegate = self
         vc.viewState = .achievements
         present(vc, animated: true, completion: nil)
         print("aqui2")
-
     }
     
-    func showLeaderboards(){
+    func showLeaderboards() {
         let vc = GKGameCenterViewController()
         vc.gameCenterDelegate = self
         vc.viewState = .leaderboards
