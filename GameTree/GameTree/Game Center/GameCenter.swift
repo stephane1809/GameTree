@@ -92,19 +92,25 @@ extension ViewController {
     }
 
     func saveAchievement() {
-        
+
         GKAchievement.loadAchievements(completionHandler: {
+        
+            
             (achievements: [GKAchievement]?, error: Error?) in
+
             print(achievements?.count, error)
+
             let achievementID = "littlehero"
             var achievement: GKAchievement? = nil
 
             achievement = achievements?.first(where: { $0.identifier == achievementID})
-            achievement?.percentComplete = achievement!.percentComplete + Double(5)
 
             if achievement == nil {
                 achievement = GKAchievement(identifier: achievementID)
             }
+
+            achievement?.percentComplete = achievement!.percentComplete + Double(5)
+
 
             if error != nil {
                 print("Error: \(String(describing: error))")
@@ -112,14 +118,18 @@ extension ViewController {
 
             let achievementsToReport: [GKAchievement] = [achievement!]
 
+//            GKAchievement
+
             GKAchievement.report(achievementsToReport, withCompletionHandler: {(error: Error?) in
+                print("reported")
                 if error != nil {
                     print("Error: \(String(describing: error))")
                 }
             })
         })
     }
-    
+
+
     func showLeaderboards() {
         let vc = GKGameCenterViewController()
         vc.gameCenterDelegate = self
@@ -127,7 +137,7 @@ extension ViewController {
         vc.leaderboardIdentifier = "topranking"
         present(vc, animated: true, completion: nil)
     }
-    // sender do botao vem aqui
+
     func unlockAchievement() {
         let achievement = GKAchievement(identifier: "littlehero")
         achievement.percentComplete = 100
