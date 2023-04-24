@@ -14,32 +14,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
         authenticateUser()
-//        showAchievements()
-//        showLeaderboards()
-//        view.addSubview(buttonAnchievements)
-//        setUpConstraints()
-        print("aqui1")
-
-    }
-
-    lazy var buttonAnchievements: UIButton = {
-        let button = UIButton()
-        button.setTitle("Anchievements", for: .normal)
-        button.tintColor = .blue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
-//        button.addTarget(self, action: #selector(showAchievements), for: .touchUpInside)
-        print("aqui3")
-        return button
-    }()
-
-    func setUpConstraints () {
-        NSLayoutConstraint.activate([
-            buttonAnchievements.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonAnchievements.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            buttonAnchievements.heightAnchor.constraint(equalToConstant: 100),
-            buttonAnchievements.widthAnchor.constraint(equalToConstant: 100)
-        ])
     }
 }
 
@@ -68,18 +42,16 @@ extension ViewController {
     }
 
     func showAchievements() {
-        let vc = GKGameCenterViewController()
-        vc.gameCenterDelegate = self
-        vc.viewState = .achievements
-        present(vc, animated: true, completion: nil)
-        print("aqui2")
+        let viewController = GKGameCenterViewController()
+        viewController.gameCenterDelegate = self
+        viewController.viewState = .achievements
+        present(viewController, animated: true, completion: nil)
     }
 
     func saveGameCenterLeaderboard (record: Int) {
+        let local = GKLocalPlayer.local
         if GKLocalPlayer.local.isAuthenticated {
-            GKLeaderboard.submitScore(record, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["topranking"], completionHandler: {
-                error in
-                
+            GKLeaderboard.submitScore(record, context: 0, player: local, leaderboardIDs: ["topranking"], completionHandler: { error in
                 if error != nil {
                     print(error!)
                 } else {
@@ -91,37 +63,38 @@ extension ViewController {
         }
     }
 
-    func saveAchievement() {
+    func resetAchievement() {
+        GKAchievement.resetAchievements { error in
+            if error != nil {
+                print("Something went wrong while reseting achievement")
+            } else {
+                print("all done")
+            }
+        }
+    }
 
-        GKAchievement.loadAchievements(completionHandler: {
-        
-            
-            (achievements: [GKAchievement]?, error: Error?) in
+    func saveAchievements(achievementID: String, percentage: Int) {
+        GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
 
             print(achievements?.count, error)
-
-            let achievementID = "littlehero"
-            var achievement: GKAchievement? = nil
-
+            let achievementID = achievementID
+            var achievement: GKAchievement?
             achievement = achievements?.first(where: { $0.identifier == achievementID})
-
             if achievement == nil {
                 achievement = GKAchievement(identifier: achievementID)
             }
 
-            achievement?.percentComplete = achievement!.percentComplete + Double(5)
-
-
+            achievement?.percentComplete = achievement!.percentComplete + Double(percentage)
             if error != nil {
                 print("Error: \(String(describing: error))")
             }
 
             let achievementsToReport: [GKAchievement] = [achievement!]
 
-//            GKAchievement
+            //            GKAchievement
 
             GKAchievement.report(achievementsToReport, withCompletionHandler: {(error: Error?) in
-                print("reported")
+                    achievement?.showsCompletionBanner = true
                 if error != nil {
                     print("Error: \(String(describing: error))")
                 }
@@ -129,13 +102,21 @@ extension ViewController {
         })
     }
 
+    func saveAllAchievemets() {
+        saveAchievements(achievementID: "littlehero", percentage: 10)
+                saveAchievements(achievementID: "bonsai", percentage: 4)
+                saveAchievements(achievementID: "bigbonsai", percentage: 2)
+                saveAchievements(achievementID: "supremepedepau", percentage: 1)
+        //    }
+
+    }
 
     func showLeaderboards() {
-        let vc = GKGameCenterViewController()
-        vc.gameCenterDelegate = self
-        vc.viewState = .leaderboards
-        vc.leaderboardIdentifier = "topranking"
-        present(vc, animated: true, completion: nil)
+        let viewController = GKGameCenterViewController()
+        viewController.gameCenterDelegate = self
+        viewController.viewState = .leaderboards
+        viewController.leaderboardIdentifier = "topranking"
+        present(viewController, animated: true, completion: nil)
     }
 
     func unlockAchievement() {
@@ -150,5 +131,4 @@ extension ViewController {
             print("Done")
         }
     }
-
 }
