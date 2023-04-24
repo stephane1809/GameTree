@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
 
     var tapped: String = ""
     @StateObject var gameModel = GameModel.shared
-    @State var isSelected: Bool = true
+    @State var goGamePlay: Bool = false
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
+
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
@@ -30,21 +32,45 @@ struct ContentView: View {
                     buttonMusic
                 }
             }
+            .onAppear {
+                gameModel.isOnMainScreen = true
+                if gameModel.record == 0 {
+                    gameModel.firstAccess()
+                }
+                if gameModel.soundIsActive {
+                    gameModel.audioView = playAudioView(nameAudio: "HomeAudio")
+                }
+            }
+            .onDisappear {
+                gameModel.isOnMainScreen = false
+                gameModel.audioView?.stop()
+            }
+            .onChange(of: gameModel.isSelected) { _ in
+                if gameModel.soundIsActive, gameModel.isOnMainScreen {
+                    gameModel.audioView = playAudioView(nameAudio: "HomeAudio")
+                } else {
+                    gameModel.audioView?.stop()
+                }
+            }
         }
     }
 
     var buttonMusic: some View {
         Button {
             withAnimation {
-                isSelected.toggle()
+                gameModel.isSelected = !gameModel.soundIsActive
+
+                if gameModel.isSelected {
+                    gameModel.audioView = playAudioView(nameAudio: "HomeAudio")
+                }
+                saveMoodSound()
             }
         } label: {
-            Image(systemName: isSelected ? selected : notSelected)
+            Image(systemName: gameModel.soundIsActive ? selected : notSelected)
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 17)
         }
     }
-    @ViewBuilder
     var recordsView: some View {
             HStack {
                 Text("\(gameModel.record)")
@@ -57,7 +83,6 @@ struct ContentView: View {
     }
 
     var navigation: some View {
-
         NavigationLink(
             destination: GameView().navigationBarBackButtonHidden(),
             label: {
@@ -77,8 +102,19 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+extension ContentView: Audio {
+    func playAudioView(nameAudio: String) -> AVAudioPlayer? {
+        let soundURL = NSURL(fileURLWithPath: Bundle.main.path(forResource: nameAudio, ofType: "mp3")!)
+        do {
+            let player = try AVAudioPlayer(contentsOf: soundURL as URL)
+            player.play()
+            return player
+        } catch {
+            print("there was some error. The error was \(error)")
+            return nil
+        }
+    }
+    func saveMoodSound() {
+        UserDefaults.standard.set(gameModel.isSelected, forKey: "sound")
     }
 }
