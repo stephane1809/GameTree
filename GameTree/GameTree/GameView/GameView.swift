@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SpriteKit
+import AVFoundation
 
 struct GameView: View {
 
@@ -19,11 +20,7 @@ struct GameView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State var gameModel = GameModel.shared
-
     @State var showingPopup = false
-    @State var isSelected: Bool = true
-    // quando eu selecionar oq é pra acontecer?
-    // é pra desligar o audio do aplicativo --> fazer um didSet
 
     @State var scene: GameScene = .makeFullscreenScene()
 
@@ -60,6 +57,23 @@ struct GameView: View {
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         remainingLifes
+                    }
+                }
+                .onAppear {
+                    gameModel.gameAudio = playAudioView(nameAudio: "GameAudio")
+                    if gameModel.soundIsActive {
+                        if gameModel.isGameOver {
+                            gameModel.gameAudio?.stop()
+                        } else {
+                            gameModel.gameAudio?.play()
+                        }
+                    } else {
+                        gameModel.gameAudio?.stop()
+                    }
+                }
+                .onDisappear {
+                    if gameModel.isSelected {
+                        gameModel.gameAudio?.stop()
                     }
                 }
         }
@@ -159,11 +173,18 @@ struct GameView: View {
                 }
                 Button {
                     withAnimation {
-                        isSelected.toggle()
+                        gameModel.isSelected = !gameModel.soundIsActive
+                        saveMoodSound()
+                        gameModel.gameAudio = playAudioView(nameAudio: "GameAudio")
+                        if gameModel.soundIsActive {
+                            gameModel.gameAudio?.play()
+                       } else {
+                           gameModel.gameAudio?.stop()
+                       }
                     }
                 } label: {
                     VStack {
-                        Image(systemName: isSelected ? selected : notSelected)
+                        Image(systemName: gameModel.soundIsActive ? selected : notSelected)
                             .foregroundColor(.black)
                             .scaledFont(name: "Georgia", size: 11)
                         Text("Sound")
@@ -176,8 +197,19 @@ struct GameView: View {
     }
 }
 
-struct GameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView()
+extension GameView: Audio {
+    func playAudioView(nameAudio: String) -> AVAudioPlayer? {
+        let soundURL = NSURL(fileURLWithPath: Bundle.main.path(forResource: nameAudio, ofType: "mp3")!)
+        do {
+            let player = try AVAudioPlayer(contentsOf: soundURL as URL)
+            player.play()
+            return player
+        } catch {
+            print("there was some error. The error was \(error)")
+            return nil
+        }
+    }
+    func saveMoodSound() {
+        UserDefaults.standard.set(gameModel.isSelected, forKey: "sound")
     }
 }

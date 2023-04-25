@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		45332C5329D4755000F151BF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5229D4755000F151BF /* GameView.swift */; };
 		45332C5529D4757C00F151BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5429D4757C00F151BF /* Extensions.swift */; };
+		4571220A29E6D704005D1930 /* TreeCollect2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220229E6D704005D1930 /* TreeCollect2.mp3 */; };
+		4571220B29E6D704005D1930 /* GameOverAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220329E6D704005D1930 /* GameOverAudio.mp3 */; };
+		4571220C29E6D704005D1930 /* HomeAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220429E6D704005D1930 /* HomeAudio.mp3 */; };
+		4571220D29E6D704005D1930 /* GameAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220529E6D704005D1930 /* GameAudio.mp3 */; };
+		4571220F29E6D704005D1930 /* PlayAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220729E6D704005D1930 /* PlayAudio.mp3 */; };
+		4571221429E6F617005D1930 /* LostLife.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571221329E6F617005D1930 /* LostLife.mp3 */; };
 		45E54A2E29DB0C2500875E28 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E54A2D29DB0C2500875E28 /* GameModel.swift */; };
 		4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */; };
 		4BD1B8D129D4630C00E29A43 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D029D4630C00E29A43 /* ContentView.swift */; };
@@ -42,6 +48,12 @@
 /* Begin PBXFileReference section */
 		45332C5229D4755000F151BF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		45332C5429D4757C00F151BF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4571220229E6D704005D1930 /* TreeCollect2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TreeCollect2.mp3; sourceTree = "<group>"; };
+		4571220329E6D704005D1930 /* GameOverAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameOverAudio.mp3; sourceTree = "<group>"; };
+		4571220429E6D704005D1930 /* HomeAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HomeAudio.mp3; sourceTree = "<group>"; };
+		4571220529E6D704005D1930 /* GameAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameAudio.mp3; sourceTree = "<group>"; };
+		4571220729E6D704005D1930 /* PlayAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlayAudio.mp3; sourceTree = "<group>"; };
+		4571221329E6F617005D1930 /* LostLife.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LostLife.mp3; sourceTree = "<group>"; };
 		45E54A2D29DB0C2500875E28 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		4BD1B8CB29D4630C00E29A43 /* GameTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTreeApp.swift; sourceTree = "<group>"; };
@@ -84,6 +96,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		457121FD29E6D6BA005D1930 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4571221029E6D708005D1930 /* Sounds */,
+				4BD1B8D229D4630D00E29A43 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		457121FE29E6D6C2005D1930 /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				45E54A2D29DB0C2500875E28 /* GameModel.swift */,
+				98C730CE29D49BE0002C3B1E /* GameScene.swift */,
+				45332C5229D4755000F151BF /* GameView.swift */,
+				45332C5429D4757C00F151BF /* Extensions.swift */,
+			);
+			path = GameView;
+			sourceTree = "<group>";
+		};
+		457121FF29E6D6E3005D1930 /* InitialView */ = {
+			isa = PBXGroup;
+			children = (
+				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
+			);
+			path = InitialView;
+			sourceTree = "<group>";
+		};
+		4571221029E6D708005D1930 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4571220529E6D704005D1930 /* GameAudio.mp3 */,
+				4571220329E6D704005D1930 /* GameOverAudio.mp3 */,
+				4571220429E6D704005D1930 /* HomeAudio.mp3 */,
+				4571221329E6F617005D1930 /* LostLife.mp3 */,
+				4571220729E6D704005D1930 /* PlayAudio.mp3 */,
+				4571220229E6D704005D1930 /* TreeCollect2.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		45D4380429F6D3560062983D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		4BD1B8C229D4630C00E29A43 = {
 			isa = PBXGroup;
 			children = (
@@ -108,13 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				F850A16C29E5E337002DA351 /* Game Center */,
-				4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */,
-				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
-				45332C5229D4755000F151BF /* GameView.swift */,
-				45332C5429D4757C00F151BF /* Extensions.swift */,
-				45E54A2D29DB0C2500875E28 /* GameModel.swift */,
-				98C730CE29D49BE0002C3B1E /* GameScene.swift */,
-				4BD1B8D229D4630D00E29A43 /* Assets.xcassets */,
+				45D4380429F6D3560062983D /* Controllers */,
+				457121FF29E6D6E3005D1930 /* InitialView */,
+				457121FE29E6D6C2005D1930 /* GameView */,
+				457121FD29E6D6BA005D1930 /* Assets */,
 				4BD1B8D429D4630D00E29A43 /* GameTree.entitlements */,
 				4BD1B8D529D4630D00E29A43 /* Preview Content */,
 			);
@@ -261,7 +319,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BD1B8D729D4630D00E29A43 /* Preview Assets.xcassets in Resources */,
+				4571220C29E6D704005D1930 /* HomeAudio.mp3 in Resources */,
+				4571221429E6F617005D1930 /* LostLife.mp3 in Resources */,
+				4571220B29E6D704005D1930 /* GameOverAudio.mp3 in Resources */,
+				4571220A29E6D704005D1930 /* TreeCollect2.mp3 in Resources */,
+				4571220F29E6D704005D1930 /* PlayAudio.mp3 in Resources */,
 				4BD1B8D329D4630D00E29A43 /* Assets.xcassets in Resources */,
+				4571220D29E6D704005D1930 /* GameAudio.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

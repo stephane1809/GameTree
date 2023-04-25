@@ -8,14 +8,13 @@
 import Foundation
 import SwiftUI
 import SpriteKit
-import GameKit
+import AVFoundation
 
 class GameScene: SKScene, ObservableObject {
 
     var gameModel = GameModel.shared
     var incrementGravity: Double = 0.0
     var lastTreeCreation: TimeInterval = .zero
-    let gameCenter = ViewController()
 
     var realPaused: Bool = false {
         didSet {
@@ -99,11 +98,11 @@ class GameScene: SKScene, ObservableObject {
                 gameModel.counterTree += 1
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
-                    gameCenter.saveGameCenterLeaderboard(record: gameModel.counterTree)
-//                    print(GKLeader)
                 }
-                gameCenter.saveAllAchievemets()
                 touchedNode.removeFromParent()
+                if gameModel.soundIsActive {
+                    gameModel.touchSound = playAudioView(nameAudio: "TreeCollect2")
+                }
             }
         }
     }
@@ -114,6 +113,9 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
+            if gameModel.soundIsActive {
+                gameModel.touchSound = playAudioView(nameAudio: "LostLife")
+            }
             if gameModel.counterFall == 1 {
                 gameModel.lifesOverOne = true
             }
@@ -122,8 +124,28 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             if gameModel.counterFall == 3 {
                 gameModel.isGameOver = true
+                if gameModel.soundIsActive {
+                    gameModel.gameOverSound = playAudioView(nameAudio: "GameOverAudio")
+                    gameModel.gameAudio?.stop()
+                }
             }
         }
+    }
+}
+extension GameScene: Audio {
+    func playAudioView(nameAudio: String) -> AVAudioPlayer? {
+        let soundURL = NSURL(fileURLWithPath: Bundle.main.path(forResource: nameAudio, ofType: "mp3")!)
+        do {
+            let player = try AVAudioPlayer(contentsOf: soundURL as URL)
+            player.play()
+            return player
+        } catch {
+            print("there was some error. The error was \(error)")
+            return nil
+        }
+    }
+    func saveMoodSound() {
+        UserDefaults.standard.set(gameModel.isSelected, forKey: "sound")
     }
 }
 

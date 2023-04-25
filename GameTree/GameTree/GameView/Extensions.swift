@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 @available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
 extension View {
@@ -51,4 +52,9 @@ struct ScaledFont: ViewModifier {
        let scaledSize = UIFontMetrics.default.scaledValue(for: size)
         return content.font(.custom(name, size: scaledSize))
     }
+}
+
+protocol Audio {
+    func playAudioView(nameAudio: String) -> AVAudioPlayer?
+    func saveMoodSound()
 }
