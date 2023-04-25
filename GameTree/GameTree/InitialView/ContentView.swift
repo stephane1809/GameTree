@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import _SpriteKit_SwiftUI
 
 struct ContentView: View {
 
@@ -52,6 +53,7 @@ struct ContentView: View {
                     gameModel.audioView?.stop()
                 }
             }
+
         }
     }
 

@@ -20,28 +20,20 @@ class InitialScene: SKScene {
         removeAllActions()
         removeAllChildren()
 
-        let textures: [SKTexture] = getTextures(with: "heart", textureAtlasName: "lifes")
+        let textures: [SKTexture] = getTextures(with: "tree", textureAtlasName: "launch")
 
         let node = SKSpriteNode(texture: textures[0])
         node.position.x = self.size.width/2
         node.position.y = self.size.height/3
-        node.scale(to: CGSize(width: 650, height: 650))
-
-        let node2 = SKSpriteNode(imageNamed: "chapeu")
-        node2.position = CGPoint(x: 0, y: 270)
-        node2.scale(to: CGSize(width: 350, height: 350))
+        node.scale(to: CGSize(width: 100, height: 100))
 
         self.addChild(node)
-        node.addChild(node2)
 
         let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count), resize: true, restore: true)
 
         node.run(SKAction.repeatForever(action))
 
     }
-
-
-
 
     static func makeFullscreenScene() -> InitialScene {
         let scene = InitialScene()
@@ -55,4 +47,3 @@ class InitialScene: SKScene {
     }
 
 }
-
