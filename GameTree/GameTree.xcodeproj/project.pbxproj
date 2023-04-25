@@ -17,6 +17,7 @@
 		4571221429E6F617005D1930 /* LostLife.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571221329E6F617005D1930 /* LostLife.mp3 */; };
 		45E54A2E29DB0C2500875E28 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E54A2D29DB0C2500875E28 /* GameModel.swift */; };
 		4B443D7A29F80080005F4ECA /* SKSpriteNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B443D7929F80080005F4ECA /* SKSpriteNodeExtension.swift */; };
+		4B443D7C29F807F0005F4ECA /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B443D7B29F807F0005F4ECA /* InitialScene.swift */; };
 		4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */; };
 		4BD1B8D129D4630C00E29A43 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D029D4630C00E29A43 /* ContentView.swift */; };
 		4BD1B8D329D4630D00E29A43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D229D4630D00E29A43 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		4571221329E6F617005D1930 /* LostLife.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LostLife.mp3; sourceTree = "<group>"; };
 		45E54A2D29DB0C2500875E28 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		4B443D7929F80080005F4ECA /* SKSpriteNodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSpriteNodeExtension.swift; sourceTree = "<group>"; };
+		4B443D7B29F807F0005F4ECA /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
 		4BD1B8CB29D4630C00E29A43 /* GameTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTreeApp.swift; sourceTree = "<group>"; };
 		4BD1B8D029D4630C00E29A43 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
+				4B443D7B29F807F0005F4ECA /* InitialScene.swift */,
 			);
 			path = InitialView;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				45332C5329D4755000F151BF /* GameView.swift in Sources */,
 				4B443D7A29F80080005F4ECA /* SKSpriteNodeExtension.swift in Sources */,
 				4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */,
+				4B443D7C29F807F0005F4ECA /* InitialScene.swift in Sources */,
 				45332C5529D4757C00F151BF /* Extensions.swift in Sources */,
 				45E54A2E29DB0C2500875E28 /* GameModel.swift in Sources */,
 			);
