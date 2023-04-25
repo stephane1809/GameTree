@@ -84,10 +84,15 @@ struct GameView: View {
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                gameModel.gameAudio?.play()
+                if gameModel.soundIsActive {
+                    gameModel.gameAudio?.play()
+                } else {
+                    gameModel.gameAudio?.stop()
+                }
                 gameModel.isPaused = true
                 showingPopup = true
             } else if newPhase == .inactive {
+                gameModel.touchSound?.stop()
                 gameModel.gameAudio?.pause()
                 scene.realPaused = true
             }

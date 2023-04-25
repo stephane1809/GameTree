@@ -8,6 +8,12 @@
 import SwiftUI
 import AVFoundation
 
+struct MainView: View {
+    var body: some View {
+        ContentView()
+    }
+}
+
 struct ContentView: View {
 
     @StateObject var gameModel = GameModel.shared
@@ -55,7 +61,9 @@ struct ContentView: View {
             }
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
-                    gameModel.audioView?.play()
+                    if gameModel.soundIsActive, gameModel.isOnMainScreen {
+                        gameModel.audioView?.play()
+                    }
                 } else if newPhase == .inactive {
                     gameModel.audioView?.pause()
                 }
