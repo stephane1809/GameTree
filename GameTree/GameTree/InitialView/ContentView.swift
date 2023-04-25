@@ -61,7 +61,9 @@ struct ContentView: View {
             }
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
-                    gameModel.audioView?.play()
+                    if gameModel.soundIsActive, gameModel.isOnMainScreen {
+                        gameModel.audioView?.play()
+                    }
                 } else if newPhase == .inactive {
                     gameModel.audioView?.pause()
                 }
