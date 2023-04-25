@@ -91,13 +91,11 @@ extension GameCenter {
 
             let achievementsToReport: [GKAchievement] = [achievement!]
 
-            achievement?.showsCompletionBanner = true            
+            achievement?.showsCompletionBanner = true
             GKNotificationBanner.show(withTitle: titleMessage,
                                       message: message,
                                       completionHandler: nil)
-
             GKAchievement.report(achievementsToReport, withCompletionHandler: {(error: Error?) in
-
                 if error != nil {
                     print("Error: \(String(describing: error))")
                 }
