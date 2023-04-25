@@ -10,11 +10,11 @@ import SwiftUI
 
 struct CustomView: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
-        return ViewController().view
+        return GameCenter().view
     }
 
     func runUIView(context: Context) -> some UIViewController {
-        return ViewController()
+        return GameCenter()
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {

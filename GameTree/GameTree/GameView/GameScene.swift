@@ -12,6 +12,7 @@ import AVFoundation
 
 class GameScene: SKScene, ObservableObject {
 
+    let gameCenter = GameCenter()
     var gameModel = GameModel.shared
     var incrementGravity: Double = 0.0
     var lastTreeCreation: TimeInterval = .zero
@@ -95,10 +96,26 @@ class GameScene: SKScene, ObservableObject {
             let touchedNode = self.atPoint(location)
 
             if touchedNode.name == "tree" {
+
                 gameModel.counterTree += 1
+
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
                 }
+                //                gameCenter.saveAllAchievemets()
+                print(gameModel.record)
+                if gameModel.counterTree == 10 && gameModel.record <= 10 {
+                    gameCenter.saveAchievements(achievementID: "littlehero", titleMessage: "Small Leaf 🍃", message: "Congratulations! You collected 10 trees!")
+                } else if gameModel.counterTree == 25 && gameModel.record <= 25 {
+                    gameCenter.saveAchievements(achievementID: "bonsai", titleMessage: "Bonsai 🍃", message: "Congratulations! You collected 25 trees!")
+                } else if gameModel.counterTree == 50 && gameModel.record <= 50 {
+                    gameCenter.saveAchievements(achievementID: "bigbonsai", titleMessage: "Big Bonsai 🍃", message: "Congratulations! You collected 50 trees!")
+
+                } else if gameModel.counterTree == 100 && gameModel.record <= 100 {
+                    gameCenter.saveAchievements(achievementID: "supremepedepau", titleMessage: "Supreme Pé de Pau 🍃", message: "Congratulations! You collected 100  trees!")
+
+                }
+
                 touchedNode.removeFromParent()
                 if gameModel.soundIsActive {
                     gameModel.touchSound = playAudioView(nameAudio: "TreeCollect2")

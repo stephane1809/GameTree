@@ -8,25 +8,25 @@
 import GameKit
 import UIKit
 
-class ViewController: UIViewController {
+class GameCenter: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
-        authenticateUser()
     }
 }
 
-extension ViewController: GKGameCenterControllerDelegate {
+extension GameCenter: GKGameCenterControllerDelegate {
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true, completion: nil)
     }
 }
 
-extension ViewController {
+extension GameCenter {
+
     func authenticateUser() {
-        var isAutheticated = GKLocalPlayer.local.isAuthenticated
+        let isAutheticated = GKLocalPlayer.local.isAuthenticated
         if !isAutheticated {
             let player = GKLocalPlayer.local
             player.authenticateHandler = { viewController, error in
@@ -73,10 +73,10 @@ extension ViewController {
         }
     }
 
-    func saveAchievements(achievementID: String, percentage: Int) {
+    func saveAchievements(achievementID: String, titleMessage: String, message: String) {
         GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
 
-            print(achievements?.count, error)
+            print(achievementID, achievements?.count, error)
             let achievementID = achievementID
             var achievement: GKAchievement?
             achievement = achievements?.first(where: { $0.identifier == achievementID})
@@ -84,31 +84,25 @@ extension ViewController {
                 achievement = GKAchievement(identifier: achievementID)
             }
 
-            achievement?.percentComplete = achievement!.percentComplete + Double(percentage)
+            achievement?.percentComplete = 100
             if error != nil {
                 print("Error: \(String(describing: error))")
             }
 
             let achievementsToReport: [GKAchievement] = [achievement!]
 
-            //            GKAchievement
+            achievement?.showsCompletionBanner = true            
+            GKNotificationBanner.show(withTitle: titleMessage,
+                                      message: message,
+                                      completionHandler: nil)
 
             GKAchievement.report(achievementsToReport, withCompletionHandler: {(error: Error?) in
-                    achievement?.showsCompletionBanner = true
+
                 if error != nil {
                     print("Error: \(String(describing: error))")
                 }
             })
         })
-    }
-
-    func saveAllAchievemets() {
-        saveAchievements(achievementID: "littlehero", percentage: 10)
-                saveAchievements(achievementID: "bonsai", percentage: 4)
-                saveAchievements(achievementID: "bigbonsai", percentage: 2)
-                saveAchievements(achievementID: "supremepedepau", percentage: 1)
-        //    }
-
     }
 
     func showLeaderboards() {

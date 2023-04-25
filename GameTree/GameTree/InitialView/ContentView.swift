@@ -6,15 +6,13 @@
 //
 
 import SwiftUI
-import GameKit
 import AVFoundation
 
 struct ContentView: View {
-
+    
+    var gameCenter = GameCenter()
     var tapped: String = ""
     @StateObject var gameModel = GameModel.shared
-    @State var isSelected: Bool = true
-    let gameCenter = ViewController()
     @State var goGamePlay: Bool = false
 
     var selected = "speaker.wave.3.fill"
@@ -35,9 +33,9 @@ struct ContentView: View {
                     buttonMusic
                 }
             }
-        }.onAppear {
-            gameCenter.authenticateUser()
             .onAppear {
+                gameCenter.authenticateUser()
+//                gameCenter.resetAchievement()
                 gameModel.isOnMainScreen = true
                 if gameModel.record == 0 {
                     gameModel.firstAccess()
@@ -86,6 +84,7 @@ struct ContentView: View {
                     .scaledFont(name: "Georgia", size: 34)
             }
     }
+
 
     var navigation: some View {
         NavigationLink(
