@@ -86,7 +86,8 @@ class GameScene: SKScene, ObservableObject {
 
         node.scale(to: CGSize(width: 400, height: 400))
 
-        let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count), resize: true, restore: true)
+        let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count),
+                                      resize: true, restore: true)
 
         node.run(SKAction.repeatForever(action))
 

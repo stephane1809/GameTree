@@ -8,6 +8,12 @@
 import SwiftUI
 import AVFoundation
 
+struct MainView: View {
+    var body: some View {
+        ContentView()
+    }
+}
+
 struct ContentView: View {
 
     @StateObject var gameModel = GameModel.shared

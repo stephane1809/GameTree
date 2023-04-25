@@ -11,7 +11,7 @@ import SwiftUI
 struct GameTreeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MotherView().environmentObject(ViewRouter())
         }
     }
 }
