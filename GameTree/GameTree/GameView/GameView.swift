@@ -62,6 +62,7 @@ struct GameView: View {
                 }
                 .onAppear {
                     gameModel.gameAudio = playAudioView(nameAudio: "GameAudio")
+                    gameModel.gameAudio?.numberOfLoops = -1
                     if gameModel.soundIsActive {
                         if gameModel.isGameOver {
                             gameModel.gameAudio?.stop()
@@ -83,9 +84,11 @@ struct GameView: View {
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
+                gameModel.gameAudio?.play()
                 gameModel.isPaused = true
                 showingPopup = true
             } else if newPhase == .inactive {
+                gameModel.gameAudio?.pause()
                 scene.realPaused = true
             }
         }
