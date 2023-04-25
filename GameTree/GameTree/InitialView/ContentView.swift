@@ -10,9 +10,9 @@ import AVFoundation
 
 struct ContentView: View {
 
-    var tapped: String = ""
     @StateObject var gameModel = GameModel.shared
     @State var goGamePlay: Bool = false
+    @Environment(\.scenePhase) var scenePhase
 
     var selected = "speaker.wave.3.fill"
     var notSelected = "speaker.slash.fill"
@@ -39,6 +39,7 @@ struct ContentView: View {
                 }
                 if gameModel.soundIsActive {
                     gameModel.audioView = playAudioView(nameAudio: "HomeAudio")
+                    gameModel.audioView?.numberOfLoops = -1
                 }
             }
             .onDisappear {
@@ -50,6 +51,13 @@ struct ContentView: View {
                     gameModel.audioView = playAudioView(nameAudio: "HomeAudio")
                 } else {
                     gameModel.audioView?.stop()
+                }
+            }
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    gameModel.audioView?.play()
+                } else if newPhase == .inactive {
+                    gameModel.audioView?.pause()
                 }
             }
         }

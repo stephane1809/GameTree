@@ -15,6 +15,7 @@
 		4571220D29E6D704005D1930 /* GameAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220529E6D704005D1930 /* GameAudio.mp3 */; };
 		4571220F29E6D704005D1930 /* PlayAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220729E6D704005D1930 /* PlayAudio.mp3 */; };
 		4571221429E6F617005D1930 /* LostLife.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571221329E6F617005D1930 /* LostLife.mp3 */; };
+		4597B3D129F7F7EB000F0916 /* burning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4597B3D029F7F7EB000F0916 /* burning.mp3 */; };
 		45E54A2E29DB0C2500875E28 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E54A2D29DB0C2500875E28 /* GameModel.swift */; };
 		4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */; };
 		4BD1B8D129D4630C00E29A43 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1B8D029D4630C00E29A43 /* ContentView.swift */; };
@@ -52,6 +53,7 @@
 		4571220529E6D704005D1930 /* GameAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameAudio.mp3; sourceTree = "<group>"; };
 		4571220729E6D704005D1930 /* PlayAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlayAudio.mp3; sourceTree = "<group>"; };
 		4571221329E6F617005D1930 /* LostLife.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LostLife.mp3; sourceTree = "<group>"; };
+		4597B3D029F7F7EB000F0916 /* burning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = burning.mp3; sourceTree = "<group>"; };
 		45E54A2D29DB0C2500875E28 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		4BD1B8CB29D4630C00E29A43 /* GameTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD1B8CE29D4630C00E29A43 /* GameTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTreeApp.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				4571220529E6D704005D1930 /* GameAudio.mp3 */,
 				4571220329E6D704005D1930 /* GameOverAudio.mp3 */,
+				4597B3D029F7F7EB000F0916 /* burning.mp3 */,
 				4571220429E6D704005D1930 /* HomeAudio.mp3 */,
 				4571221329E6F617005D1930 /* LostLife.mp3 */,
 				4571220729E6D704005D1930 /* PlayAudio.mp3 */,
@@ -312,6 +315,7 @@
 				4571220F29E6D704005D1930 /* PlayAudio.mp3 in Resources */,
 				4BD1B8D329D4630D00E29A43 /* Assets.xcassets in Resources */,
 				4571220D29E6D704005D1930 /* GameAudio.mp3 in Resources */,
+				4597B3D129F7F7EB000F0916 /* burning.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

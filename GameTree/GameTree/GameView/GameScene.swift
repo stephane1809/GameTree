@@ -114,7 +114,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
             if gameModel.soundIsActive {
-                gameModel.touchSound = playAudioView(nameAudio: "LostLife")
+                gameModel.touchSound = playAudioView(nameAudio: "burning")
             }
             if gameModel.counterFall == 1 {
                 gameModel.lifesOverOne = true

@@ -18,6 +18,7 @@ struct GameView: View {
     var notSelected = "speaker.slash.fill"
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.scenePhase) var scenePhase
 
     @State var gameModel = GameModel.shared
     @State var showingPopup = false
@@ -61,6 +62,7 @@ struct GameView: View {
                 }
                 .onAppear {
                     gameModel.gameAudio = playAudioView(nameAudio: "GameAudio")
+                    gameModel.gameAudio?.numberOfLoops = -1
                     if gameModel.soundIsActive {
                         if gameModel.isGameOver {
                             gameModel.gameAudio?.stop()
@@ -79,6 +81,16 @@ struct GameView: View {
         }
         .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
             scene.realPaused = newValue
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                gameModel.gameAudio?.play()
+                gameModel.isPaused = true
+                showingPopup = true
+            } else if newPhase == .inactive {
+                gameModel.gameAudio?.pause()
+                scene.realPaused = true
+            }
         }
     }
 
@@ -195,6 +207,7 @@ struct GameView: View {
             }
         }
     }
+
 }
 
 extension GameView: Audio {
