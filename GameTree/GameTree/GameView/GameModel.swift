@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 class GameModel: ObservableObject {
     @Published var counterTree: Int = 0
@@ -14,7 +15,14 @@ class GameModel: ObservableObject {
     @Published var lifesOverTwo: Bool = false
     @Published var isGameOver: Bool = false
     @Published var isPaused: Bool = false
-
+    @Published var isSelected: Bool = true
+    @Published var isOnMainScreen: Bool = false
+    @Published var audioView: AVAudioPlayer?
+    @Published var audioPlay: AVAudioPlayer?
+    @Published var touchSound: AVAudioPlayer?
+    @Published var gameAudio: AVAudioPlayer?
+    @Published var gameOverSound: AVAudioPlayer?
+    var soundIsActive: Bool { UserDefaults.standard.bool(forKey: "sound") }
     var record: Int { UserDefaults.standard.integer(forKey: "tree") }
 
     static let shared = GameModel()
@@ -26,5 +34,9 @@ class GameModel: ObservableObject {
         self.lifesOverTwo = false
         self.isGameOver = false
         self.isPaused = false
+    }
+
+    func firstAccess() {
+        UserDefaults.standard.set(true, forKey: "sound")
     }
 }
