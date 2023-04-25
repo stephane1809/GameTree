@@ -88,6 +88,7 @@ struct GameView: View {
                 gameModel.isPaused = true
                 showingPopup = true
             } else if newPhase == .inactive {
+                gameModel.touchSound?.stop()
                 gameModel.gameAudio?.pause()
                 scene.realPaused = true
             }
