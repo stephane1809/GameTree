@@ -8,8 +8,6 @@
 import Foundation
 
 struct Onboarding: Hashable, Equatable {
-    var lottie: String
+    var asset: String
     var desc: String
-    var button: String
-    var height: Double
 }

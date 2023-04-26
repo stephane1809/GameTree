@@ -10,10 +10,9 @@ import Lottie
 
 struct Onboard: View {
     var onBoardingModel: [Onboarding] = [
-        Onboarding(lottie: "leaf", desc: "Hi, small leaf", button: "", height: UIScreen.main.bounds.size.height * 0.4),
-        Onboarding(lottie: "tree", desc: "Touch the trees to save then from the fire",
-                   button: "", height: UIScreen.main.bounds.size.height * 0.4),
-        Onboarding(lottie: "fire", desc: "Are you ready?", button: "Let's go", height: UIScreen.main.bounds.size.height * 0.2)
+        Onboarding(asset: "leaf", desc: "Hi, small leaf"),
+        Onboarding(asset: "tree_launch_00", desc: "Touch the trees to save then from the fire"),
+        Onboarding(asset: "tree_launch_00", desc: "Are you ready?")
     ]
    @State private var index = 0
     var body: some View {
@@ -21,28 +20,34 @@ struct Onboard: View {
             TabView(selection: $index) {
                 ForEach(0..<onBoardingModel.count, id: \.self) {model in
                     VStack(alignment: .center) {
-                        LottieView(lottieFile: onBoardingModel[model].lottie)
-                            .frame(width: UIScreen.main.bounds.size.width,
-                                   height: onBoardingModel[model].height, alignment: .center)
-//                            .padding(.top, 100)
-                        
-                        Text(onBoardingModel[index].desc)
+                        if model == 0 {
+                            LottieView(lottieFile: onBoardingModel[model].asset)
+                                .frame(width: UIScreen.main.bounds.size.width,
+                                       height: UIScreen.main.bounds.size.height * 0.18, alignment: .center)
+                            Text(onBoardingModel[model].desc)
+                        } else {
+                            Image("tree")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.size.width,
+                                       height: UIScreen.main.bounds.size.height * 0.3,
+                                       alignment: .center)
+                            Text(onBoardingModel[index].desc)
+                        }
 
-                        if onBoardingModel[index].button != "" {
+                        if model == 2 {
                             NavigationLink {
                                 MainView()
                                     .navigationBarBackButtonHidden(true)
                                     .indexViewStyle(.page(backgroundDisplayMode: .never))
                             } label: {
-                                Text(onBoardingModel[index].button)
-                                    .foregroundColor(Color.white)
-                                    .font(.title3)
-                                    .padding()
+                                Text("Play now")
+                                    .foregroundColor(Color.black)
+                                    .font(.headline)
+                                    .padding(10)
                                     .cornerRadius(12)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                    )
-//                                    .frame(width: UIScreen.main.bounds.size.height * 0.2, height: UIScreen.main.bounds.size.height * 0.2)
+                                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 1))
                             }
                         }
                     }
@@ -51,6 +56,10 @@ struct Onboard: View {
             }.tabViewStyle(.page(indexDisplayMode: .automatic))
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .padding()
+                .background {
+                    LinearGradient(colors: [.white, .green], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        .ignoresSafeArea()
+                }
         }
     }
 }
