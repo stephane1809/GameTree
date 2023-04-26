@@ -34,6 +34,7 @@ class GameScene: SKScene, ObservableObject {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         addLaserFloor()
+        createFire()
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -74,6 +75,24 @@ class GameScene: SKScene, ObservableObject {
             tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
             tree.physicsBody?.collisionBitMask = 0
             self.addChild(tree)
+    }
+
+    func createFire() {
+        let textures: [SKTexture] = getTextures(with: "fire", textureAtlasName: "fires")
+
+        let node = SKSpriteNode(texture: textures[0])
+
+        node.position.x = 200
+        node.position.y = 150
+
+        node.scale(to: CGSize(width: 400, height: 400))
+
+        let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count),
+                                      resize: true, restore: true)
+
+        node.run(SKAction.repeatForever(action))
+
+        self.addChild(node)
     }
 
     func addLaserFloor() {
@@ -131,7 +150,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
             if gameModel.soundIsActive {
-                gameModel.touchSound = playAudioView(nameAudio: "LostLife")
+                gameModel.touchSound = playAudioView(nameAudio: "burning")
             }
             if gameModel.counterFall == 1 {
                 gameModel.lifesOverOne = true
