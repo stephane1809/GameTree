@@ -11,7 +11,8 @@ import SwiftUI
 struct GameTreeApp: App {
     var body: some Scene {
         WindowGroup {
-            MotherView().environmentObject(ViewRouter())
+            SplashScreenView()
+
         }
     }
 }
