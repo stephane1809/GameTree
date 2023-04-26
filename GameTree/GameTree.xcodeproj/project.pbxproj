@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		45332C5329D4755000F151BF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5229D4755000F151BF /* GameView.swift */; };
 		45332C5529D4757C00F151BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45332C5429D4757C00F151BF /* Extensions.swift */; };
+		455592BA29F95C7B0073C306 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455592B929F95C7B0073C306 /* SplashScreenView.swift */; };
 		4571220A29E6D704005D1930 /* TreeCollect2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220229E6D704005D1930 /* TreeCollect2.mp3 */; };
 		4571220B29E6D704005D1930 /* GameOverAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220329E6D704005D1930 /* GameOverAudio.mp3 */; };
 		4571220C29E6D704005D1930 /* HomeAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4571220429E6D704005D1930 /* HomeAudio.mp3 */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		45332C5229D4755000F151BF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		45332C5429D4757C00F151BF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		455592B929F95C7B0073C306 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		4571220229E6D704005D1930 /* TreeCollect2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TreeCollect2.mp3; sourceTree = "<group>"; };
 		4571220329E6D704005D1930 /* GameOverAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameOverAudio.mp3; sourceTree = "<group>"; };
 		4571220429E6D704005D1930 /* HomeAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HomeAudio.mp3; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD1B8D029D4630C00E29A43 /* ContentView.swift */,
+				455592B929F95C7B0073C306 /* SplashScreenView.swift */,
 			);
 			path = InitialView;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				980F954329E58FEC00768836 /* UikitToSwiftUI.swift in Sources */,
 				4B443D7A29F80080005F4ECA /* SKSpriteNodeExtension.swift in Sources */,
 				4BD1B8CF29D4630C00E29A43 /* GameTreeApp.swift in Sources */,
+				455592BA29F95C7B0073C306 /* SplashScreenView.swift in Sources */,
 				45A1BBD529F867BE001609E6 /* RemainLifesView.swift in Sources */,
 				4597B3E429F82381000F0916 /* MotherView.swift in Sources */,
 				4597B3D729F820C8000F0916 /* OnBoard.swift in Sources */,
