@@ -13,7 +13,7 @@ extension SKScene {
         let textureAtlas = SKTextureAtlas(named: textureAtlasName)
         var textures: [SKTexture] = []
         let names = textureAtlas.textureNames.sorted()
-        for algo in 0..<names.count{
+        for algo in 0..<names.count {
             if names[algo].contains(name) {
                 let texture = textureAtlas.textureNamed(names[algo])
                 texture.filteringMode = .nearest

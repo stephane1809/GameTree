@@ -18,9 +18,11 @@ struct GameView: View {
     var notSelected = "speaker.slash.fill"
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.scenePhase) var scenePhase
 
     @State var gameModel = GameModel.shared
     @State var showingPopup = false
+    @State var heartImage = ""
 
     @State var scene: GameScene = .makeFullscreenScene()
 
@@ -61,6 +63,7 @@ struct GameView: View {
                 }
                 .onAppear {
                     gameModel.gameAudio = playAudioView(nameAudio: "GameAudio")
+                    gameModel.gameAudio?.numberOfLoops = -1
                     if gameModel.soundIsActive {
                         if gameModel.isGameOver {
                             gameModel.gameAudio?.stop()
@@ -79,6 +82,21 @@ struct GameView: View {
         }
         .onChange(of: gameModel.isPaused || gameModel.isGameOver) { newValue in
             scene.realPaused = newValue
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                if gameModel.soundIsActive {
+                    gameModel.gameAudio?.play()
+                } else {
+                    gameModel.gameAudio?.stop()
+                }
+                gameModel.isPaused = true
+                showingPopup = true
+            } else if newPhase == .inactive {
+                gameModel.touchSound?.stop()
+                gameModel.gameAudio?.pause()
+                scene.realPaused = true
+            }
         }
     }
 
@@ -104,20 +122,10 @@ struct GameView: View {
         }
     }
     var remainingLifes: some View {
-        HStack(spacing: 3) {
-
-            Image(systemName: gameModel.isGameOver ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
-            Image(systemName: gameModel.lifesOverTwo ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
-            Image(systemName: gameModel.lifesOverOne ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
+        HStack(spacing: -8) {
+            RemainLifesView(lost: $gameModel.isGameOver)
+            RemainLifesView(lost: $gameModel.lifesOverTwo)
+            RemainLifesView(lost: $gameModel.lifesOverOne)
         }
     }
     var pauseView: some View {

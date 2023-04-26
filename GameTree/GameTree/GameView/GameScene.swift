@@ -100,7 +100,8 @@ class GameScene: SKScene, ObservableObject {
 
         node.scale(to: CGSize(width: 400, height: 400))
 
-        let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count), resize: true, restore: true)
+        let action = SKAction.animate(with: textures, timePerFrame: 1/TimeInterval(textures.count),
+                                      resize: true, restore: true)
 
         node.run(SKAction.repeatForever(action))
 
@@ -146,7 +147,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "Laser" || contact.bodyB.node?.name == "Laser" {
             gameModel.counterFall += 1
             if gameModel.soundIsActive {
-                gameModel.touchSound = playAudioView(nameAudio: "LostLife")
+                gameModel.touchSound = playAudioView(nameAudio: "burning")
             }
             if gameModel.counterFall == 1 {
                 gameModel.lifesOverOne = true
