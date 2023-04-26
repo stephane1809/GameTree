@@ -120,7 +120,7 @@ struct GameView: View {
                 showingPopup.toggle()
             }
         } label: {
-            Image(systemName: "pause.fill")
+            Image("pause")
                 .foregroundColor(.black)
         }
     }
