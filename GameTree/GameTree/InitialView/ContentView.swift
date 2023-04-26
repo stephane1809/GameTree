@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import _SpriteKit_SwiftUI
 
 struct MainView: View {
     var body: some View {

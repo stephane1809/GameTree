@@ -40,7 +40,7 @@ class GameScene: SKScene, ObservableObject {
         super.update(currentTime)
         if gameModel.isPaused == false && gameModel.isGameOver == false && currentTime - lastTreeCreation > 0.9 {
             createTree()
-            incrementGravity += 0.01
+            incrementGravity += 0.08
             lastTreeCreation = currentTime
             physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
         }
@@ -58,21 +58,35 @@ class GameScene: SKScene, ObservableObject {
     }
 
     func createTree() {
-            let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
-            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 900), CGPoint(x: 264, y: 900), CGPoint(x: 332, y: 900)]
+//            let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
+            let treePositions: [CGPoint] = [CGPoint(x: 100, y: 880), CGPoint(x: 264, y: 880), CGPoint(x: 332, y: 880)]
+        
+            let textures: [SKTexture] = getTextures(with: "tree", textureAtlasName: "tree_fall")
 
-            let tree = SKSpriteNode(imageNamed: "lofiTree")
-            tree.name = "tree"
-            tree.size = treeSizes.randomElement()!
-            tree.position = treePositions.randomElement()!
+            let tree = SKSpriteNode(texture: textures[0])
+            tree.position.x = self.size.width/2
+            tree.position.y = self.size.height/3
+            tree.scale(to: CGSize(width: 100, height: 150))
+//        tree.size = treeSizes.randomElement()!
+        tree.position = treePositions.randomElement()!
+        tree.name = "tree"
 
-            // physics property
-            tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
-            tree.physicsBody?.isDynamic = true
-            tree.physicsBody!.affectedByGravity = true
-            tree.physicsBody!.usesPreciseCollisionDetection = false
-            tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
-            tree.physicsBody?.collisionBitMask = 0
+
+        // physics property
+        tree.physicsBody = SKPhysicsBody(rectangleOf: tree.frame.size)
+        tree.physicsBody?.isDynamic = true
+        tree.physicsBody!.affectedByGravity = true
+        tree.physicsBody!.usesPreciseCollisionDetection = false
+        tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
+        tree.physicsBody?.collisionBitMask = 0
+
+            let action = SKAction.animate(with: textures, timePerFrame: 8/TimeInterval(textures.count), resize: true, restore: true)
+
+            tree.run(SKAction.repeatForever(action))
+//            self.addChild(node)
+
+//            let tree = SKSpriteNode(imageNamed: "lofiTree")
+
             self.addChild(tree)
     }
 
