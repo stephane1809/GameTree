@@ -14,9 +14,8 @@ class ViewRouter: ObservableObject {
         if !UserDefaults.standard.bool(forKey: "didLaunchBefore") {
             UserDefaults.standard.set(true, forKey: "didLaunchBefore")
             currentPage = "FirstAccessView"
-        }
-        else {
-                currentPage = "GameView"
+        } else {
+            currentPage = "GameView"
         }
     }
 }

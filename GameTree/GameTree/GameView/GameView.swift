@@ -22,6 +22,7 @@ struct GameView: View {
 
     @State var gameModel = GameModel.shared
     @State var showingPopup = false
+    @State var heartImage = ""
 
     @State var scene: GameScene = .makeFullscreenScene()
 
@@ -121,20 +122,10 @@ struct GameView: View {
         }
     }
     var remainingLifes: some View {
-        HStack(spacing: 3) {
-
-            Image(systemName: gameModel.isGameOver ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
-            Image(systemName: gameModel.lifesOverTwo ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
-            Image(systemName: gameModel.lifesOverOne ? "heart" : "heart.fill")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 17)
-
+        HStack(spacing: -8) {
+            RemainLifesView(lost: $gameModel.isGameOver)
+            RemainLifesView(lost: $gameModel.lifesOverTwo)
+            RemainLifesView(lost: $gameModel.lifesOverOne)
         }
     }
     var pauseView: some View {
@@ -212,7 +203,6 @@ struct GameView: View {
             }
         }
     }
-
 }
 
 extension GameView: Audio {
