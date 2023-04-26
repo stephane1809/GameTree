@@ -40,7 +40,7 @@ class GameScene: SKScene, ObservableObject {
         super.update(currentTime)
         if gameModel.isPaused == false && gameModel.isGameOver == false && currentTime - lastTreeCreation > 0.9 {
             createTree()
-            incrementGravity += 0.01
+            incrementGravity += 0.08
             lastTreeCreation = currentTime
             physicsWorld.gravity = CGVector(dx: 0, dy: -0.3 - incrementGravity)
         }
@@ -80,7 +80,7 @@ class GameScene: SKScene, ObservableObject {
         tree.physicsBody?.contactTestBitMask = MascaraBit.Laser
         tree.physicsBody?.collisionBitMask = 0
 
-            let action = SKAction.animate(with: textures, timePerFrame: 10/TimeInterval(textures.count), resize: true, restore: true)
+            let action = SKAction.animate(with: textures, timePerFrame: 8/TimeInterval(textures.count), resize: true, restore: true)
 
             tree.run(SKAction.repeatForever(action))
 //            self.addChild(node)
