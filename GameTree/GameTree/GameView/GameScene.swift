@@ -33,6 +33,7 @@ class GameScene: SKScene, ObservableObject {
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
+        view.backgroundColor = .clear
         addLaserFloor()
         createFire()
     }
@@ -54,7 +55,7 @@ class GameScene: SKScene, ObservableObject {
             height: UIScreen.main.bounds.height
         )
         scene.scaleMode = .fill
-        scene.backgroundColor = .white
+        scene.backgroundColor = .clear
         return scene
     }
 

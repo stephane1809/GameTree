@@ -28,9 +28,12 @@ struct GameView: View {
 
     var body: some View {
         NavigationView {
-            SpriteView(scene: scene)
+            SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
-                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
+                .background {
+                    LinearGradient(colors: [Color(hue: 202/360, saturation: 49/100, brightness: 100/100), Color(hue: 216/360, saturation: 61/100, brightness: 88/100, opacity: 0.18), Color(hue: 4/360, saturation: 1, brightness: 1, opacity: 0.18)], startPoint: .top, endPoint: .bottom)
+                        .ignoresSafeArea()
+                }                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {
