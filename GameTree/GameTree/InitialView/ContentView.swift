@@ -95,7 +95,9 @@ struct ContentView: View {
             HStack {
                 Text("\(gameModel.record)")
                     .scaledFont(name: "Georgia", size: 34)
-                Image(systemName: "tree")
+                Image("tree")
+                    .resizable()
+                    .frame(width: 64, height: 96)
 
                     .foregroundColor(.green)
                     .scaledFont(name: "Georgia", size: 34)

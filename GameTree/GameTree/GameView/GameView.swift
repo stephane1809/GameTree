@@ -105,9 +105,6 @@ struct GameView: View {
 
     var titlePoints: some View {
         HStack {
-            Image(systemName: "tree")
-                .foregroundColor(.black)
-                .scaledFont(name: "Georgia", size: 28)
             Text("\(gameModel.counterTree)")
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
@@ -121,7 +118,6 @@ struct GameView: View {
             }
         } label: {
             Image("pause")
-                .foregroundColor(.black)
         }
     }
     var remainingLifes: some View {
