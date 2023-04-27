@@ -25,9 +25,9 @@ struct SplashScreenView: View {
                     Image(splashImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 200, height: 200, alignment: .center)
+                        .frame(width: 100, height: 100, alignment: .center)
                         .onAppear {
-                            heartLifes()
+                            splashTrees()
                         }
                 }
                 .onAppear {
@@ -55,6 +55,22 @@ struct SplashScreenView: View {
         }
         timer?.fire()
     }
+
+    func splashTrees() {
+        var index = 1
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 1/5,
+            repeats: true
+        ) { (timer) in
+            splashImage = "tree\(index)"
+            index += 1
+            if index > 3 {
+                index = 0
+
+            }
+        }
+        timer?.fire()
+    }
 }
 
 struct SplashScreenView_Previews: PreviewProvider {
@@ -65,4 +81,3 @@ struct SplashScreenView_Previews: PreviewProvider {
         SplashScreenView()
     }
 }
-

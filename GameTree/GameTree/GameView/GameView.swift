@@ -24,6 +24,8 @@ struct GameView: View {
     @State var showingPopup = false
     @State var heartImage = ""
 
+    @State var colors = [Color(hue: 202/360, saturation: 0.49, brightness: 1), Color(hue: 216/360, saturation: 0.61, brightness: 0.88, opacity: 0.18), Color(hue: 4/360, saturation: 1, brightness: 1, opacity: 0.18)]
+
     @State var scene: GameScene = .makeFullscreenScene()
 
     var body: some View {
@@ -31,9 +33,10 @@ struct GameView: View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background {
-                    LinearGradient(colors: [Color(hue: 202/360, saturation: 49/100, brightness: 100/100), Color(hue: 216/360, saturation: 61/100, brightness: 88/100, opacity: 0.18), Color(hue: 4/360, saturation: 1, brightness: 1, opacity: 0.18)], startPoint: .top, endPoint: .bottom)
+                    LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom)
                         .ignoresSafeArea()
-                }                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
+                }
+                .popupNavigationView(horizontalPadding: 100, show: $gameModel.isGameOver, content: {
                     pauseView
                         .toolbar {
                             ToolbarItem(placement: .principal) {

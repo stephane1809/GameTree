@@ -17,7 +17,6 @@ struct MainView: View {
 }
 
 struct ContentView: View {
-    
     var gameCenter = GameCenter()
     @StateObject var gameModel = GameModel.shared
     @State var goGamePlay: Bool = false
