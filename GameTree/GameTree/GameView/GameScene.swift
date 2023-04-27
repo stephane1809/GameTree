@@ -133,6 +133,7 @@ class GameScene: SKScene, ObservableObject {
 
                 if gameModel.counterTree > gameModel.record {
                     UserDefaults.standard.set(gameModel.counterTree, forKey: "tree")
+                    gameCenter.saveGameCenterLeaderboard(record: gameModel.counterTree)
                 }
                 //                gameCenter.saveAllAchievemets()
                 print(gameModel.record)
