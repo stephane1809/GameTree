@@ -62,7 +62,7 @@ class GameScene: SKScene, ObservableObject {
     func createTree() {
 //            let treeSizes: [CGSize] = [CGSize(width: 30.5, height: 41.5), CGSize(width: 61, height: 83)]
             let treePositions: [CGPoint] = [CGPoint(x: 100, y: 880), CGPoint(x: 264, y: 880), CGPoint(x: 332, y: 880)]
-        
+
             let textures: [SKTexture] = getTextures(with: "tree", textureAtlasName: "tree_fall")
 
             let tree = SKSpriteNode(texture: textures[0])
@@ -86,9 +86,7 @@ class GameScene: SKScene, ObservableObject {
 
             tree.run(SKAction.repeatForever(action))
 //            self.addChild(node)
-
 //            let tree = SKSpriteNode(imageNamed: "lofiTree")
-
             self.addChild(tree)
     }
 
