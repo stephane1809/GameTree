@@ -101,6 +101,7 @@ struct GameView: View {
                 scene.realPaused = true
             }
         }
+        .preferredColorScheme(.light)
     }
 
     var titlePoints: some View {
@@ -109,6 +110,7 @@ struct GameView: View {
                 .foregroundColor(.black)
                 .scaledFont(name: "Georgia", size: 28)
         }
+        .preferredColorScheme(.light)
     }
     var buttonPause: some View {
         Button {
@@ -119,6 +121,7 @@ struct GameView: View {
         } label: {
             Image("pause")
         }
+        .preferredColorScheme(.light)
     }
     var remainingLifes: some View {
         HStack(spacing: -8) {
@@ -201,6 +204,7 @@ struct GameView: View {
                 }
             }
         }
+        .preferredColorScheme(.light)
     }
 }
 

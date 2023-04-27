@@ -12,6 +12,7 @@ import _SpriteKit_SwiftUI
 struct MainView: View {
     var body: some View {
         ContentView()
+            .preferredColorScheme(.light)
     }
 }
 
@@ -72,6 +73,7 @@ struct ContentView: View {
                     gameModel.audioView?.pause()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 
@@ -102,6 +104,7 @@ struct ContentView: View {
                     .foregroundColor(.green)
                     .scaledFont(name: "Georgia", size: 34)
             }
+            .preferredColorScheme(.light)
     }
 
 
